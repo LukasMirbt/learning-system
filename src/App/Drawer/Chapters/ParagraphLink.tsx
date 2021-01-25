@@ -6,14 +6,14 @@ import React, {
   useCallback,
 } from "react";
 import styled, { css } from "styled-components";
-import { SubheadingsType } from "../HeadingNavigation/HeadingNavigation";
+import { SubheadingsType } from "../Sections/Sections";
 import { ClickableHeadingStyle, SubheadingStyle } from "../../common";
-import { nestedHeadingsState } from "../HeadingNavigation/HeadingNavigation";
+import { nestedHeadingsState } from "../Sections/Sections";
 import { useRecoilValue } from "recoil";
 import { Switch, Route, NavLink } from "react-router-dom";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import { StyledLink } from "./Chapter";
+import { StyledLink } from "./ChapterLink";
 import Typography from "@material-ui/core/Typography";
 import { useHistory } from "react-router-dom";
 import { videoPlayerState } from "../../Video/VideoElement/useVideoPlayer";

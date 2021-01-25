@@ -1,14 +1,6 @@
-import React, {
-  FunctionComponent,
-  useEffect,
-  useMemo,
-  useState,
-  useRef,
-  useCallback,
-} from "react";
+import React, { FunctionComponent, useEffect, useMemo } from "react";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
-import { ClickableHeadingStyle, SubheadingStyle } from "../../common";
 import { NavLink, useHistory } from "react-router-dom";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
@@ -40,7 +32,7 @@ const Time = styled.span`
   font-weight: normal;
 `;
 
-const Chapter: FunctionComponent<{
+const ChapterLink: FunctionComponent<{
   conceptName: string;
   heading: string;
   subheadingName: string;
@@ -117,4 +109,4 @@ const Chapter: FunctionComponent<{
   );
 };
 
-export default Chapter;
+export default ChapterLink;

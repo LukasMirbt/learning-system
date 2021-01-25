@@ -1,15 +1,8 @@
-import React, {
-  FunctionComponent,
-  useMemo,
-  Dispatch,
-  SetStateAction,
-} from "react";
-import styled, { css } from "styled-components";
-import { Concept } from "../../HeadingNavigation";
-import HeadingRowItems from "./HeadingRowItems";
-import { ClickableHeading } from "../../../../common";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { Link } from "react-router-dom";
+import React, { FunctionComponent, Dispatch, SetStateAction } from "react";
+import styled from "styled-components";
+import { Concept } from "../Sections";
+import RowItems from "./RowItems";
+import { ClickableHeading } from "../../../common";
 
 const StyledRow = styled(ClickableHeading)`
   width: 240px;
@@ -31,7 +24,7 @@ const HeadingRow: FunctionComponent<{
         setIsShowing((prevIsShowing) => !prevIsShowing);
       }}
     >
-      <HeadingRowItems
+      <RowItems
         concept={concept}
         conceptIndex={conceptIndex}
         isShowing={isShowing}

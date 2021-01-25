@@ -1,15 +1,7 @@
-import React, {
-  FunctionComponent,
-  CSSProperties,
-  MutableRefObject,
-} from "react";
+import React, { FunctionComponent, CSSProperties } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import {
-  SearchableHeading,
-  SearchableCue,
-} from "../../AppBar/Search/getSearchableItems";
-import { isCue } from "../../AppBar/Search/ResultList/ResultList";
+import { SearchableCue } from "../../AppBar/Search/getSearchableItems";
 
 const Container = styled(Link)`
   display: flex;

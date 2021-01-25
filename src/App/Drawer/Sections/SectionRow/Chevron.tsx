@@ -1,11 +1,11 @@
-import React, { FunctionComponent, useMemo } from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronDown,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { useLocation, useParams, useRouteMatch } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 
 interface StyledChevronProps {
   sc: {
@@ -24,11 +24,7 @@ const Chevron: FunctionComponent<{
   isShowing: boolean;
   conceptName: string;
 }> = ({ isShowing, conceptName }) => {
-  const path = useMemo(() => `/${conceptName}`.replace(/\s+/g, "-"), [
-    conceptName,
-  ]);
-
-  const match = useRouteMatch(path);
+  const match = useRouteMatch(`/${conceptName}`.replace(/\s+/g, "-"));
 
   return (
     <StyledChevron

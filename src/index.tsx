@@ -4,18 +4,18 @@ import "./index.css";
 import App from "./App/App";
 import reportWebVitals from "./reportWebVitals";
 import {
-  StylesProvider,
+  StylesProvider as MUIStylesProvider,
   ThemeProvider as MUIThemeProvider,
 } from "@material-ui/core/styles";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider as SCThemeProvider } from "styled-components";
 import theme from "./App/theme";
 import { RecoilRoot } from "recoil";
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <StylesProvider injectFirst>
-      <ThemeProvider theme={theme}>
+    <MUIStylesProvider injectFirst>
+      <SCThemeProvider theme={theme}>
         <MUIThemeProvider theme={theme}>
           <BrowserRouter>
             <RecoilRoot>
@@ -23,8 +23,8 @@ ReactDOM.render(
             </RecoilRoot>
           </BrowserRouter>
         </MUIThemeProvider>
-      </ThemeProvider>
-    </StylesProvider>
+      </SCThemeProvider>
+    </MUIStylesProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

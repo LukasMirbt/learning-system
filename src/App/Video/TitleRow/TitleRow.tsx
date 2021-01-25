@@ -17,17 +17,15 @@ const Title = styled(Typography)`
 const TitleRow: FunctionComponent = () => {
   const location = useLocation();
 
-  return (
-    <>
-      {location.pathname !== "/" && (
-        <Title variant="h1">
-          {location.pathname.split("/")[1].replace(/-/g, " ")}
-          {" - "}
-          {location.pathname.split("/")[2].replace(/-/g, " ")}
-        </Title>
-      )}
-    </>
-  );
+  const splitPathname = location.pathname.split("/");
+
+  return splitPathname.length >= 3 ? (
+    <Title variant="h1">
+      {splitPathname[1].replace(/-/g, " ")}
+      {" - "}
+      {splitPathname[2].replace(/-/g, " ")}
+    </Title>
+  ) : null;
 };
 
 export default TitleRow;

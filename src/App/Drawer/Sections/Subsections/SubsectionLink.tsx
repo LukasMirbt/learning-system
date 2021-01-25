@@ -1,9 +1,8 @@
-import React, { FunctionComponent, useMemo } from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
-import { Concept, SubheadingsType } from "../../HeadingNavigation";
+import { Concept, SubheadingsType } from "../Sections";
 import Typography from "@material-ui/core/Typography";
-import { ClickableHeadingStyle } from "../../../../common";
-
+import { ClickableHeadingStyle } from "../../../common";
 import { NavLink } from "react-router-dom";
 
 const StyledNavLink = styled(NavLink)`
@@ -27,27 +26,20 @@ const Heading = styled(Typography)`
   font-size: 0.875rem;
 `;
 
-const Headings: FunctionComponent<{
+const SubsectionLink: FunctionComponent<{
   heading: string;
   subheadings: SubheadingsType;
   concept: Concept;
   conceptIndex: number;
   headingIndex: number;
 }> = ({ heading, subheadings, concept, conceptIndex, headingIndex }) => {
-  /*   const [selectedHeading, setSelectedHeading] = useRecoilState(
-    selectedHeadingState
-  ); */
-
-  const path = useMemo(
-    () => `/${concept.conceptName}/${heading}`.replace(/\s+/g, "-"),
-    [concept.conceptName, heading]
-  );
-
   return (
-    <StyledNavLink to={path}>
+    <StyledNavLink
+      to={`/${concept.conceptName}/${heading}`.replace(/\s+/g, "-")}
+    >
       <Heading variant="h4"> {heading}</Heading>
     </StyledNavLink>
   );
 };
 
-export default Headings;
+export default SubsectionLink;

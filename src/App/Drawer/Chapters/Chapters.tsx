@@ -1,11 +1,19 @@
-import React, { FunctionComponent, Fragment, useEffect } from "react";
+import React, { FunctionComponent, Fragment } from "react";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
-import { nestedHeadingsState } from "../HeadingNavigation/HeadingNavigation";
+import { nestedHeadingsState } from "../Sections/Sections";
 import { useRecoilValue } from "recoil";
-import { Switch, Route, useHistory } from "react-router-dom";
-import Paragraph from "./Paragraph";
-import Chapter from "./Chapter";
+import { Switch, Route } from "react-router-dom";
+import Paragraph from "./ParagraphLink";
+import ChapterLink from "./ChapterLink";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-top: ${({ theme }) => `1px solid ${theme.palette.divider}`};
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+`;
 
 const Title = styled(Typography)`
   font-size: 1.25rem;
@@ -13,11 +21,11 @@ const Title = styled(Typography)`
   margin-left: 1rem;
 `;
 
-const Subheadings: FunctionComponent = () => {
+const Chapters: FunctionComponent = () => {
   const nestedHeadings = useRecoilValue(nestedHeadingsState);
 
   return (
-    <>
+    <Container>
       <Title variant="h2">Chapters</Title>
       <Switch>
         {nestedHeadings.map(({ conceptName, conceptHeadings }) => {
@@ -41,7 +49,7 @@ const Subheadings: FunctionComponent = () => {
                       subheadingIndex
                     ) => (
                       <Fragment key={subheadingName}>
-                        <Chapter
+                        <ChapterLink
                           conceptName={conceptName}
                           heading={heading}
                           subheadingName={subheadingName}
@@ -76,8 +84,8 @@ const Subheadings: FunctionComponent = () => {
           );
         })}
       </Switch>
-    </>
+    </Container>
   );
 };
 
-export default Subheadings;
+export default Chapters;

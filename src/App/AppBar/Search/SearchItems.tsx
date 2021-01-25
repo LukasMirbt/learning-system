@@ -1,21 +1,8 @@
-import React, {
-  FunctionComponent,
-  Dispatch,
-  SetStateAction,
-  useState,
-  useMemo,
-  useRef,
-  useEffect,
-  MutableRefObject,
-} from "react";
-import styled from "styled-components";
-import Paper from "@material-ui/core/Paper";
+import React, { FunctionComponent, useEffect } from "react";
 import Form from "./Form";
 import ResultList from "./ResultList/ResultList";
 import Fuse from "fuse.js";
 import { useRecoilValue, atom, selector, useResetRecoilState } from "recoil";
-import { nestedHeadingsState } from "../../Drawer/HeadingNavigation/HeadingNavigation";
-import getSearchableItems from "./getSearchableItems";
 import searchableItems from "../../Video/Media/searchableItems";
 
 const searchOptions = {

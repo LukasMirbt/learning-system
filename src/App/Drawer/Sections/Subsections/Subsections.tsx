@@ -1,15 +1,15 @@
 import React, { FunctionComponent } from "react";
-import { Concept } from "../../HeadingNavigation";
-import Headings from "./Headings";
+import { Concept } from "../Sections";
+import SubsectionLink from "./SubsectionLink";
 
-const Dropdown: FunctionComponent<{
+const Subsections: FunctionComponent<{
   concept: Concept;
   conceptIndex: number;
 }> = ({ concept, conceptIndex }) => {
   return (
     <>
       {concept.conceptHeadings.map(({ heading, subheadings }, headingIndex) => (
-        <Headings
+        <SubsectionLink
           key={heading}
           heading={heading}
           concept={concept}
@@ -22,4 +22,4 @@ const Dropdown: FunctionComponent<{
   );
 };
 
-export default Dropdown;
+export default Subsections;

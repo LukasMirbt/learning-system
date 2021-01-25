@@ -1,42 +1,55 @@
-import React, { FunctionComponent, useState, useContext } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import styled, { css } from "styled-components";
-import HeadingNavigation from "./HeadingNavigation/HeadingNavigation";
 import Typography from "@material-ui/core/Typography";
-import Subheadings from "./Subheadings/Subheadings";
-import TemporaryDrawer from "@material-ui/core/Drawer";
-import Items from "./Items";
+import Sections from "./Sections/Sections";
+import Chapters from "./Chapters/Chapters";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { ThemeContext } from "styled-components";
-import { useRecoilState, atom } from "recoil";
+import TemporaryDrawer from "./TemporaryDrawer";
 
-export const isDrawerOpenState = atom({
-  key: "isDrawerOpen",
-  default: false,
-});
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+
+  background-color: ${({ theme }) => theme.background};
+
+  color: rgba(0, 0, 0, 0.87);
+
+  @media screen and (min-width: ${({ theme }) =>
+      theme.breakpoints.values.xl}px) {
+    border-right: ${({ theme }) => `1px solid ${theme.palette.divider}`};
+  }
+
+  ${({ theme }) => css`
+    @media screen and (display-mode: fullscreen) {
+      margin-right: 0;
+    }
+  `}
+`;
+
+const Title = styled(Typography)`
+  font-size: 1.25rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+`;
+
+export const DrawerComponent = (
+  <Container>
+    <Title variant="h2">Sections</Title>
+    <Sections />
+    <Chapters />
+  </Container>
+);
 
 const Drawer: FunctionComponent = () => {
-  const [isOpen, setIsOpen] = useRecoilState(isDrawerOpenState);
-
   const theme = useContext(ThemeContext);
 
   const isXLScreen = useMediaQuery(theme.breakpoints.up("xl"));
-  return (
-    <>
-      {isXLScreen === true ? (
-        <Items />
-      ) : (
-        <TemporaryDrawer
-          anchor="left"
-          open={isOpen}
-          onClose={() => {
-            setIsOpen(false);
-          }}
-        >
-          <Items />
-        </TemporaryDrawer>
-      )}
-    </>
-  );
+  return isXLScreen === true ? DrawerComponent : <TemporaryDrawer />;
 };
 
 export default Drawer;

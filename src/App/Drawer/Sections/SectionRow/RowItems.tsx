@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
-import { Concept } from "../../HeadingNavigation";
+import { Concept } from "../Sections";
 import Typography from "@material-ui/core/Typography";
 import Chevron from "./Chevron";
 

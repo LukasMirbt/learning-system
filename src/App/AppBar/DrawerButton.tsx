@@ -5,7 +5,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { ThemeContext } from "styled-components";
 import { useSetRecoilState } from "recoil";
-import { isDrawerOpenState } from "../Drawer/Drawer";
+import { isDrawerOpenState } from "../Drawer/TemporaryDrawer";
+import { useRouteMatch } from "react-router-dom";
 
 const StyledIconButton = styled(IconButton)`
   margin-right: 0.5rem;
@@ -17,9 +18,11 @@ const DrawerButton: FunctionComponent = () => {
 
   const setIsDrawerOpen = useSetRecoilState(isDrawerOpenState);
 
+  const isSearchRoute = useRouteMatch("/search") !== null;
+
   return (
     <>
-      {isXLScreen === false && (
+      {isXLScreen === false && isSearchRoute === false && (
         <StyledIconButton
           color="inherit"
           aria-label="open drawer"

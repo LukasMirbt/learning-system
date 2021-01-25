@@ -1,4 +1,4 @@
-import { Concept } from "../../Drawer/HeadingNavigation/HeadingNavigation";
+import { Concept } from "../../Drawer/Sections/Sections";
 import cuesWithPathList from "../../Video/Media/cuesWithPathList";
 
 export interface SearchableHeading {

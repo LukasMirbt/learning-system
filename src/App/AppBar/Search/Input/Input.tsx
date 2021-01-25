@@ -9,7 +9,7 @@ import { isCue, numberOfResultsToShow } from "../ResultList/ResultList";
 import { useHistory } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import ClearInputButton from "./ClearInputButton";
-import { isSearchOpenState } from "../SearchButton";
+import { isSearchOpenState } from "../Search";
 import { videoPlayerState } from "../../../Video/VideoElement/useVideoPlayer";
 
 export const StyledInput = styled.input`

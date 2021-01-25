@@ -4,7 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { ClickableHeadingStyle } from "../../../common";
 import ListItem from "@material-ui/core/ListItem";
 import { selectedItemIndexState, searchResultsState } from "../SearchItems";
-import { isSearchOpenState } from "../SearchButton";
+import { isSearchOpenState } from "../Search";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";

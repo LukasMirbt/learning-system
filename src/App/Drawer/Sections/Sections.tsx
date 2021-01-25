@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { useRecoilValue, atom } from "recoil";
-import HeadingWithDropdown from "./HeadingWithDropdown/HeadingWithDropdown";
+import SectionDropdown from "./SectionDropdown";
 import nestedHeadings from "../../Video/Media/nestedHeadings";
 
 type NonEmptyArray<T> = [T, ...T[]];
@@ -31,12 +31,12 @@ export const nestedHeadingsState = atom<Concept[]>({
 
 const StyledNav = styled.nav``;
 
-const HeadingNavigation: FunctionComponent = () => {
+const Sections: FunctionComponent = () => {
   const nestedHeadings = useRecoilValue(nestedHeadingsState);
   return (
     <StyledNav aria-label="Nested list of video links">
       {nestedHeadings.map((concept, index) => (
-        <HeadingWithDropdown
+        <SectionDropdown
           conceptIndex={index}
           key={concept.id}
           concept={concept}
@@ -46,4 +46,4 @@ const HeadingNavigation: FunctionComponent = () => {
   );
 };
 
-export default HeadingNavigation;
+export default Sections;

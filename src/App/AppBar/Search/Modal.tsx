@@ -1,10 +1,10 @@
-import React, { FunctionComponent, Dispatch, SetStateAction } from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import Modal from "@material-ui/core/Modal";
 import SearchItems from "./SearchItems";
 import Paper from "@material-ui/core/Paper";
 import { useSetRecoilState, useResetRecoilState } from "recoil";
-import { isSearchOpenState } from "./SearchButton";
+import { isSearchOpenState } from "./Search";
 import { searchTermState } from "./SearchItems";
 
 const StyledModal = styled(Modal)`

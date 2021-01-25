@@ -2,11 +2,10 @@ import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import Video from "./Video/Video";
 import Drawer from "./Drawer/Drawer";
-import Sidebar from "./Drawer/Subheadings/Sidebar";
 import AppBar from "./AppBar/AppBar";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { nestedHeadingsState } from "./Drawer/HeadingNavigation/HeadingNavigation";
+import { nestedHeadingsState } from "./Drawer/Sections/Sections";
 import Search from "./Search/Search";
 import usePathnameToSetVideoTimeOnMount from "./usePathnameToSetVideoTimeOnMount";
 
@@ -19,11 +18,6 @@ const Main = styled.main`
   position: relative;
   width: 100%;
   height: calc(100% - 4rem);
-`;
-
-const Container = styled.div`
-  display: flex;
-  width: calc(100% - 241px);
 `;
 
 const App: FunctionComponent = () => {
@@ -42,17 +36,16 @@ const App: FunctionComponent = () => {
 
       <Main>
         <Switch>
-          <Route exact path="/">
-            <Redirect to={redirectPath} />
-          </Route>
-
           <Route path="/search">
             <Search />
           </Route>
 
-          <Route>
-            <Drawer />
+          <Route exact path="/">
+            <Redirect to={redirectPath} />
+          </Route>
 
+          <Route path={"/"}>
+            <Drawer />
             <Video />
           </Route>
         </Switch>
