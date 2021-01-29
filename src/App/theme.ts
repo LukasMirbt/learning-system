@@ -11,6 +11,11 @@ const MUITheme = createMuiTheme({
       main: "#008fcc",
     },
   },
+  props: {
+    MuiUseMediaQuery: {
+      noSsr: true,
+    },
+  },
 });
 
 const secondary = "#008fcc";

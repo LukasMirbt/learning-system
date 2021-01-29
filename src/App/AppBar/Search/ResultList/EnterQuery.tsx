@@ -2,8 +2,9 @@ import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { faFeather } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Typography, { TypographyProps } from "@material-ui/core/Typography";
 
-const TextContainer = styled.div`
+const Container = styled.div`
   color: rgba(0, 0, 0, 0.75);
   padding: 1rem 0;
   height: 128px;
@@ -18,12 +19,20 @@ const WriteIcon = styled(FontAwesomeIcon)`
   padding-top: 0.25rem;
 `;
 
+type TextProps = TypographyProps<"p", { component: "p" }>;
+
+const Text = styled(Typography)<TextProps>`
+  font-size: 1rem;
+`;
+
 const EnterQuery: FunctionComponent = () => {
   return (
-    <TextContainer>
-      Enter a query
+    <Container>
+      <Text variant="h5" component="p">
+        Enter a query
+      </Text>
       <WriteIcon icon={faFeather} />
-    </TextContainer>
+    </Container>
   );
 };
 

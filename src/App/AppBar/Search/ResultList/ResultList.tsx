@@ -71,12 +71,11 @@ const ResultList: FunctionComponent = () => {
       {searchResults?.slice(0, numberOfResultsToShow).map(({ item }, index) => {
         return (
           <Item
-            key={item.value}
-            startTime={isCue(item) ? item.startTime : undefined}
-            endTime={isCue(item) ? item.endTime : undefined}
+            key={item.text}
+            startTime={item.startTime}
+            endTime={item.endTime}
             index={index}
-            value={item.value}
-            path={item.path}
+            value={item.text}
           />
         );
       })}

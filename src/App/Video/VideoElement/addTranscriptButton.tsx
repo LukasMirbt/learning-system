@@ -1,11 +1,6 @@
 import { VideoPlayer } from "./useVideoPlayer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowCircleRight,
-  faArrowCircleLeft,
-  faEye,
-  faEyeSlash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import ReactDOMServer from "react-dom/server";
 import { SetterOrUpdater } from "recoil";
 
@@ -38,7 +33,7 @@ const addTranscriptButton = (args: {
     </>
   );
 
-  button.className = "plyr__controls__item plyr__control";
+  button.className = "transcriptButton plyr__controls__item plyr__control";
   button.setAttribute("data-plyr", "Toggle transcript");
   button.setAttribute("type", "button");
 

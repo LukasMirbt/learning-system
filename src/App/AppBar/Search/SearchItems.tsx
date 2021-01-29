@@ -3,15 +3,14 @@ import Form from "./Form";
 import ResultList from "./ResultList/ResultList";
 import Fuse from "fuse.js";
 import { useRecoilValue, atom, selector, useResetRecoilState } from "recoil";
-import searchableItems from "../../Video/Media/searchableItems";
+import cues from "../../Media/View-from-a-blue-moon/cues";
 
 const searchOptions = {
-  keys: ["value"],
+  keys: ["text"],
 };
 
 export interface SearchableItem {
   value: string;
-  path: string;
 }
 
 export const selectedItemIndexState = atom({
@@ -26,7 +25,7 @@ export const searchTermState = atom({
 
 export const searchableItemsState = atom({
   key: "searchableItems",
-  default: searchableItems,
+  default: cues,
 });
 
 export const fuseState = selector({

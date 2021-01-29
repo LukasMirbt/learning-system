@@ -17,5 +17,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "Video"]
+  "include": ["src", "Video", "src/App/Video/Media/View-from-a-blue-moon/videoStructure.ts"]
 }

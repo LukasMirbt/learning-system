@@ -1,8 +1,28 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
 import Plyr from "plyr";
 import { useSetRecoilState } from "recoil";
 import { atom } from "recoil";
 import addTranscriptButton from "./addTranscriptButton";
+
+export const setVideoTime = async (args: {
+  videoPlayer: VideoPlayer;
+  time: number;
+}) => {
+  const { videoPlayer, time } = args;
+  if (videoPlayer.canPlay === true) {
+    videoPlayer.currentTime = time;
+    await videoPlayer.play();
+  } else {
+    const onCanPlay = async () => {
+      videoPlayer.currentTime = time;
+
+      try {
+        await videoPlayer.play();
+      } catch {}
+    };
+    videoPlayer.once("canplay", onCanPlay);
+  }
+};
 
 export const videoPlayerState = atom<VideoPlayer | null>({
   key: "videoPlayer",
@@ -16,12 +36,18 @@ export const isTranscriptShowingState = atom({
 });
 
 export interface VideoPlayer extends Plyr {
+  readonly canPlay: boolean;
+}
+
+interface InitialVideoPlayer extends Plyr {
   canPlay: boolean;
 }
 
-const useVideo = () => {
+const useVideoPlayer = () => {
   const setVideoPlayerRef = useSetRecoilState(videoPlayerState);
   const setIsTranscriptShowing = useSetRecoilState(isTranscriptShowingState);
+
+  const videoPlayerRef = useRef<VideoPlayer | null>(null);
 
   useLayoutEffect(() => {
     const videoPlayer = new Plyr("#videoPlayer", {
@@ -44,7 +70,7 @@ const useVideo = () => {
       tooltips: {
         controls: true,
       },
-    }) as VideoPlayer;
+    }) as InitialVideoPlayer;
 
     addTranscriptButton({ videoPlayer, setIsTranscriptShowing });
 
@@ -58,6 +84,7 @@ const useVideo = () => {
 
     videoPlayer.once("canplay", onCanPlay);
 
+    videoPlayerRef.current = videoPlayer;
     setVideoPlayerRef(videoPlayer);
 
     return () => {
@@ -67,4 +94,4 @@ const useVideo = () => {
   }, [setVideoPlayerRef, setIsTranscriptShowing]);
 };
 
-export default useVideo;
+export default useVideoPlayer;

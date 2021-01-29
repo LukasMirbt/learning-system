@@ -11,6 +11,8 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import ClearInputButton from "./ClearInputButton";
 import { isSearchOpenState } from "../Search";
 import { videoPlayerState } from "../../../Video/VideoElement/useVideoPlayer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export const StyledInput = styled.input`
   border: ${({ theme }) => `2px solid ${theme.primary}`};
@@ -36,6 +38,25 @@ export const StyledInput = styled.input`
   }
 `;
 
+const Container = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+`;
+
+export const SearchIcon = styled(FontAwesomeIcon)`
+  && {
+    font-size: 2rem;
+    color: ${({ theme }) => theme.primary};
+
+    position: absolute;
+
+    margin-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+`;
+
 const Input: FunctionComponent<{
   inputRef: MutableRefObject<HTMLInputElement | null>;
 }> = ({ inputRef }) => {
@@ -56,7 +77,7 @@ const Input: FunctionComponent<{
   }, [inputRef]);
 
   return (
-    <>
+    <Container>
       <StyledInput
         id="search-input"
         ref={inputRef}
@@ -72,7 +93,7 @@ const Input: FunctionComponent<{
         autoCapitalize="off"
         spellCheck="false"
         type="search"
-        placeholder="Search in videos or chapters"
+        /*    placeholder="Search in videos or chapters" */
         maxLength={64}
         onFocus={() => {
           setSelectedItemIndex(0);
@@ -100,17 +121,17 @@ const Input: FunctionComponent<{
 
             e.preventDefault();
             setIsSearchOpen(false);
-            history.push(item.path, {
+            history.push(history.location.pathname, {
               time: item.startTime,
             });
           }
         }}
       />
-
+      <SearchIcon aria-hidden icon={faSearch} />
       {searchTerm !== "" && (
         <ClearInputButton inputRef={inputRef} setSearchTerm={setSearchTerm} />
       )}
-    </>
+    </Container>
   );
 };
 

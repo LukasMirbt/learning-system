@@ -1,31 +1,25 @@
-import React, {
-  FunctionComponent,
-  MutableRefObject,
-  useEffect,
-  useState,
-  useRef,
-} from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
-import { ClickableHeading } from "../../common";
 import { useRecoilValue } from "recoil";
 import { videoPlayerState } from "../VideoElement/useVideoPlayer";
-import Typography from "@material-ui/core/Typography";
-import { SearchableCue } from "../../AppBar/Search/getSearchableItems";
+import { Cue as CueType } from "../../Media/Media";
+import { setVideoTime } from "../VideoElement/useVideoPlayer";
+import Typography, { TypographyProps } from "@material-ui/core/Typography";
 
-const StyledCue = styled.button`
+type InitialCueProps = TypographyProps<"button", { component: "button" }>;
+
+const InitialCue = styled(Typography)<InitialCueProps>`
   display: flex;
   align-items: flex-start;
   text-align: start;
   justify-content: flex-start;
 
-  margin-right: 0.25em;
-  padding: 0;
-  width: 100%;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0.00938em;
+  width: calc(100% - 0.25em);
 
+  padding: 0;
+`;
+
+export const StyledCue = styled(InitialCue)`
   &:hover {
     background-color: rgba(0, 0, 0, 0.08);
   }
@@ -38,66 +32,33 @@ const StyledCue = styled.button`
   }
 `;
 
-const Text = styled(Typography)`
-  font-weight: inherit;
-`;
-
-interface StateRef {
-  element: HTMLButtonElement | null;
-  isActive: boolean;
-}
-
-const Cue: FunctionComponent<{ cue: SearchableCue; isLast: boolean }> = ({
-  cue,
-  isLast,
-}) => {
+const Cue: FunctionComponent<{
+  cue: CueType;
+  cueIndex: number;
+  /*   isLast: boolean;
+  style: CSSProperties; */
+}> = ({ cue, cueIndex }) => {
   const videoPlayer = useRecoilValue(videoPlayerState);
-
-  const elementRef = useRef<HTMLButtonElement>(null);
-  const isActiveRef = useRef(false);
-
-  useEffect(() => {
-    if (videoPlayer !== null) {
-      const { startTime, endTime } = cue;
-
-      const onTimeUpdate = () => {
-        const time = videoPlayer.currentTime;
-
-        if (time >= startTime && time <= endTime) {
-          if (isActiveRef.current === false) {
-            isActiveRef.current = true;
-            elementRef.current!.classList.add("current");
-            elementRef.current!.scrollIntoView({
-              behavior: "smooth",
-              block: "center",
-              inline: "center",
-            });
-          }
-        } else if (isActiveRef.current === true) {
-          elementRef.current!.classList.remove("current");
-          isActiveRef.current = false;
-        }
-      };
-
-      videoPlayer.on("timeupdate", onTimeUpdate);
-      return () => {
-        videoPlayer.off("timeupdate", onTimeUpdate);
-      };
-    }
-  }, [videoPlayer, cue]);
 
   return (
     <StyledCue
-      ref={elementRef}
+      variant="body1"
+      component="button"
+      id={`cue${cueIndex}`}
+      /*  style={style} */
       type="button"
-      id={isLast ? "#endOfTranscript" : undefined}
+      /*   id={isLast ? "#endOfTranscript" : undefined} */
       onClick={() => {
-        videoPlayer!.currentTime = cue.startTime;
-        videoPlayer!.play();
+        if (videoPlayer !== null) {
+          setVideoTime({
+            videoPlayer,
+            time: cue.startTime,
+          });
+        }
       }}
-      key={cue.value}
+      key={cue.text}
     >
-      {cue.value}
+      {cue.text}
     </StyledCue>
   );
 };

@@ -12,6 +12,11 @@ const Container = styled(Link)`
   font-size: 1.5rem;
   max-width: 1200px;
   border-bottom: ${({ theme }) => `1px solid ${theme.palette.divider}`};
+
+  &:nth-child(2) {
+    border-top: ${({ theme }) => `1px solid ${theme.palette.divider}`};
+  }
+
   padding: 0 1rem;
 
   &:hover {

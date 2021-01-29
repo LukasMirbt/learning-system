@@ -47,10 +47,10 @@ const ArrowIcon = styled(FontAwesomeIcon)`
 const Item: FunctionComponent<{
   index: number;
   value: string;
-  path: string;
+
   startTime?: number;
   endTime?: number;
-}> = ({ index, value, path, startTime, endTime }) => {
+}> = ({ index, value, startTime, endTime }) => {
   const [selectedItemIndex, setSelectedItemIndex] = useRecoilState(
     selectedItemIndexState
   );
@@ -75,7 +75,8 @@ const Item: FunctionComponent<{
           setSelectedItemIndex(index);
         }}
         exact
-        to={
+        to="/"
+        /*         to={
           startTime === undefined
             ? path
             : {
@@ -84,7 +85,7 @@ const Item: FunctionComponent<{
                   time: startTime,
                 },
               }
-        }
+        } */
         isActive={() => index === selectedItemIndex}
       >
         {value}

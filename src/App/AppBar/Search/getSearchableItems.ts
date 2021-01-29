@@ -1,5 +1,4 @@
 import { Concept } from "../../Drawer/Sections/Sections";
-import cuesWithPathList from "../../Video/Media/cuesWithPathList";
 
 export interface SearchableHeading {
   value: string;

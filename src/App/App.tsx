@@ -1,14 +1,14 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import styled from "styled-components";
 import Video from "./Video/Video";
 import Drawer from "./Drawer/Drawer";
 import AppBar from "./AppBar/AppBar";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { nestedHeadingsState } from "./Drawer/Sections/Sections";
+import { videoStructuresState } from "./Drawer/Sections/Sections";
 import Search from "./Search/Search";
-import usePathnameToSetVideoTimeOnMount from "./usePathnameToSetVideoTimeOnMount";
-
+import PageNotFound from "./PageNotFound";
+import captions from "./Media/View-from-a-blue-moon/captions.vtt";
 /* const { remote, ipcRenderer } = window.require("electron"); */
 
 const Main = styled.main`
@@ -17,19 +17,19 @@ const Main = styled.main`
 
   position: relative;
   width: 100%;
-  height: calc(100% - 4rem);
+
+  height: calc(100% - 56px);
+
+  @media (min-width: 0px) and (orientation: landscape) {
+    height: calc(100% - 48px);
+  }
+
+  @media (min-width: 600px) {
+    height: calc(100% - 64px);
+  }
 `;
 
 const App: FunctionComponent = () => {
-  const nestedHeadings = useRecoilValue(nestedHeadingsState);
-
-  usePathnameToSetVideoTimeOnMount();
-
-  const redirectPath = `${nestedHeadings[0].conceptName}/${nestedHeadings[0].conceptHeadings[0].heading}`.replace(
-    /\s+/g,
-    "-"
-  );
-
   return (
     <>
       <AppBar />
@@ -41,12 +41,16 @@ const App: FunctionComponent = () => {
           </Route>
 
           <Route exact path="/">
-            <Redirect to={redirectPath} />
+            <Redirect to="/View-from-a-blue-moon" />
           </Route>
 
-          <Route path={"/"}>
+          <Route path="/">
             <Drawer />
             <Video />
+          </Route>
+
+          <Route path={"*"}>
+            <PageNotFound />
           </Route>
         </Switch>
       </Main>

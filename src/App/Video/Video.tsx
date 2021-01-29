@@ -1,24 +1,34 @@
-import React, {
-  FunctionComponent,
-  useRef,
-  MutableRefObject,
-  useState,
-} from "react";
-import styled, { css } from "styled-components";
-import Plyr from "plyr";
-import QuestionDialog from "./QuestionDialog/QuestionDialog";
-import { useRecoilValue } from "recoil";
-import { randomQuestionIndexState } from "./QuestionDialog/QuestionDialog";
+import React, { FunctionComponent } from "react";
+import styled from "styled-components";
 import VideoElement from "./VideoElement/VideoElement";
 import Transcript from "./Transcript/Transcript";
 import TitleRow from "./TitleRow/TitleRow";
 import useCSSTranscriptToggle from "./useCSSTranscriptToggle";
+import viewFromABlueMoonVideoSource from "../Media/View-from-a-blue-moon/video.mp4";
+import viewFromABlueMoonCaptionsSource from "../Media/View-from-a-blue-moon/captions.vtt";
+import elephantsDreamVideoSource from "../Media/Elephants-dream/video.mp4";
+import elephantsDreamCaptionsSource from "../Media/Elephants-dream/captions.vtt";
+import { Switch, Route } from "react-router-dom";
+import { atom, useRecoilValue } from "recoil";
+
+const sources = {
+  "/View-from-a-blue-moon": {
+    videoSource: viewFromABlueMoonVideoSource,
+    captionsSource: viewFromABlueMoonCaptionsSource,
+  },
+  "/Elephants-dream": {
+    videoSource: elephantsDreamVideoSource,
+    captionsSource: elephantsDreamCaptionsSource,
+  },
+};
 
 const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+
+  width: calc(100% - 241px);
 
   flex-grow: 1;
 
@@ -28,11 +38,23 @@ const Container = styled.div`
     flex-grow: 1;
   }
 
+  .transcriptButton {
+    display: none;
+
+    @media screen and (min-width: ${({ theme }) =>
+        theme.breakpoints.values.lg}px) {
+      display: block;
+    }
+  }
+
   padding: 1.5rem;
 `;
 
 const Row = styled.div`
   display: flex;
+
+  width: 100%;
+  max-height: 100%;
 
   @media screen and (min-width: ${({ theme }) =>
       theme.breakpoints.values.lg}px) {
@@ -47,57 +69,17 @@ const Row = styled.div`
   max-height: calc(100% - 4rem);
 `;
 
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  max-height: 100%;
-`;
-
-/* interface BlockerProps {
-  sc: {
-    randomQuestionIndex: number | null;
-  };
-}
-
-const Blocker = styled.div<BlockerProps>`
-  height: 100%;
-  position: absolute;
-  transition: background-color 250ms;
-  z-index: 1;
-
-  ${({ sc: { randomQuestionIndex } }) =>
-    randomQuestionIndex === null
-      ? css`
-          pointer-events: none;
-          background-color: transparent;
-        `
-      : css`
-          background-color: black;
-          transition: background-color 750ms;
-        `};
-`; */
-
 const Video: FunctionComponent = () => {
-  const randomQuestionIndex = useRecoilValue(randomQuestionIndexState);
-
   useCSSTranscriptToggle();
 
   return (
     <Container>
-      {randomQuestionIndex !== null && <QuestionDialog />}
+      <Row id="videoRow">
+        <VideoElement />
 
-      <Content>
-        <Row id="videoRow">
-          <VideoElement />
-
-          <Transcript />
-        </Row>
-        <TitleRow />
-      </Content>
-
-      {/*   {randomQuestionIndex !== null && <QuestionDialog />} */}
+        <Transcript />
+      </Row>
+      <TitleRow />
     </Container>
   );
 };

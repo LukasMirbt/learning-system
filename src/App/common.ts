@@ -8,19 +8,17 @@ export const ClickableHeadingStyle = css`
 
   min-height: 2.25rem;
 
-  /*   border-radius: ${({ theme }) => theme.borderRadius}; */
-  box-sizing: border-box;
   padding: 0.25rem 1rem;
 
-  margin-bottom: 0.25rem;
+  /*   margin-bottom: 0.25rem; */
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.04);
   }
 
-  &:last-child {
+  /*   &:last-child {
     margin-bottom: 0;
-  }
+  } */
 `;
 
 export const SubheadingStyle = css`
@@ -66,11 +64,11 @@ export const ClickableHeading = styled(ListItem)`
   box-sizing: border-box;
   padding: 0.25rem 1rem;
 
-  margin-bottom: 0.25rem;
+  /*  margin-bottom: 0.25rem; */
 
-  &:last-child {
+  /*   &:last-child {
     margin-bottom: 0;
-  }
+  } */
 `;
 
 export const logPerformance = (callback: () => void) => {

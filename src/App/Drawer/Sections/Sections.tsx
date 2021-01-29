@@ -1,8 +1,11 @@
-import React, { FunctionComponent } from "react";
-import styled from "styled-components";
+import React, { createContext, FunctionComponent, Fragment } from "react";
+import styled, { css } from "styled-components";
 import { useRecoilValue, atom } from "recoil";
-import SectionDropdown from "./SectionDropdown";
-import nestedHeadings from "../../Video/Media/nestedHeadings";
+import Accordion from "../../Accordion/Accordion";
+import Subsections from "./Subsections/Subsections";
+import viewFromABlueMoonStructure from "../../Media/View-from-a-blue-moon/videoStructure";
+import elephantsDreamStructure from "../../Media/Elephants-dream/videoStructure";
+import { VideoStructure } from "../../Media/Media";
 
 type NonEmptyArray<T> = [T, ...T[]];
 
@@ -24,25 +27,42 @@ export interface Concept {
   }>;
 }
 
-export const nestedHeadingsState = atom<Concept[]>({
-  key: "nestedHeadings",
-  default: nestedHeadings,
+export const videoStructuresState = atom<VideoStructure[]>({
+  key: "videoStructures",
+  default: [viewFromABlueMoonStructure, elephantsDreamStructure],
 });
 
-const StyledNav = styled.nav``;
+const Container = styled.div``;
+
+const titleCSS = css`
+  font-weight: 500;
+`;
+
+export const TitleContext = createContext("");
 
 const Sections: FunctionComponent = () => {
-  const nestedHeadings = useRecoilValue(nestedHeadingsState);
+  const videoStructures = useRecoilValue(videoStructuresState);
   return (
-    <StyledNav aria-label="Nested list of video links">
-      {nestedHeadings.map((concept, index) => (
-        <SectionDropdown
-          conceptIndex={index}
-          key={concept.id}
-          concept={concept}
-        />
-      ))}
-    </StyledNav>
+    <Container>
+      {videoStructures.map(({ title, sections }, index) => {
+        const ID = `${title}${index}`.replace(/\s+/g, "-");
+        return (
+          <Fragment key={ID}>
+            <TitleContext.Provider key={ID} value={title}>
+              <Accordion
+                key={ID}
+                title={title}
+                ID={ID}
+                isExpandedInitially={index === 0}
+                titleCSS={titleCSS}
+              >
+                <Subsections sections={sections} />
+              </Accordion>
+            </TitleContext.Provider>
+          </Fragment>
+        );
+      })}
+    </Container>
   );
 };
 
