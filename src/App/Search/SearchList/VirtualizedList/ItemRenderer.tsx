@@ -1,6 +1,6 @@
 import React, { CSSProperties, FunctionComponent } from "react";
 import Row from "./Row";
-import { SearchableCue } from "../../AppBar/Search/getSearchableItems";
+import { SearchableCue } from "../../SearchButton/getSearchableItems";
 import Fuse from "fuse.js";
 import Header from "./Header/Header";
 

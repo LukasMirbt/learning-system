@@ -4,23 +4,9 @@ import VideoElement from "./VideoElement/VideoElement";
 import Transcript from "./Transcript/Transcript";
 import TitleRow from "./TitleRow/TitleRow";
 import useCSSTranscriptToggle from "./useCSSTranscriptToggle";
-import viewFromABlueMoonVideoSource from "../Media/View-from-a-blue-moon/video.mp4";
-import viewFromABlueMoonCaptionsSource from "../Media/View-from-a-blue-moon/captions.vtt";
-import elephantsDreamVideoSource from "../Media/Elephants-dream/video.mp4";
-import elephantsDreamCaptionsSource from "../Media/Elephants-dream/captions.vtt";
 import { Switch, Route } from "react-router-dom";
-import { atom, useRecoilValue } from "recoil";
 
-const sources = {
-  "/View-from-a-blue-moon": {
-    videoSource: viewFromABlueMoonVideoSource,
-    captionsSource: viewFromABlueMoonCaptionsSource,
-  },
-  "/Elephants-dream": {
-    videoSource: elephantsDreamVideoSource,
-    captionsSource: elephantsDreamCaptionsSource,
-  },
-};
+const videoPaths = ["/View-from-a-blue-moon", "/Elephants-dream"] as const;
 
 const Container = styled.div`
   display: flex;
@@ -69,13 +55,27 @@ const Row = styled.div`
   max-height: calc(100% - 4rem);
 `;
 
+const Container2 = styled.div`
+  display: flex;
+  flex-grow: 1;
+`;
+
 const Video: FunctionComponent = () => {
   useCSSTranscriptToggle();
+
 
   return (
     <Container>
       <Row id="videoRow">
-        <VideoElement />
+        <Switch>
+          {videoPaths.map((path) => (
+            <Route key={path} path={path}>
+              <Container2>
+                <VideoElement path={path} />
+              </Container2>
+            </Route>
+          ))}
+        </Switch>
 
         <Transcript />
       </Row>

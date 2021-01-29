@@ -1,7 +1,7 @@
 import React, { FunctionComponent, CSSProperties } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { SearchableCue } from "../../AppBar/Search/getSearchableItems";
+import { SearchableCue } from "../../SearchButton/getSearchableItems";
 
 const Container = styled(Link)`
   display: flex;

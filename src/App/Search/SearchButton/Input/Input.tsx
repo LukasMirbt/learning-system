@@ -9,7 +9,7 @@ import { isCue, numberOfResultsToShow } from "../ResultList/ResultList";
 import { useHistory } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import ClearInputButton from "./ClearInputButton";
-import { isSearchOpenState } from "../Search";
+import { isSearchOpenState } from "../SearchButton";
 import { videoPlayerState } from "../../../Video/VideoElement/useVideoPlayer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";

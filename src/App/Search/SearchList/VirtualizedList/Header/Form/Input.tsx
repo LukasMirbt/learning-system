@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useEffect, MutableRefObject } from "react";
-import { searchTermState } from "../../../../AppBar/Search/SearchItems";
+import { searchTermState } from "../../../../SearchButton/SearchItems";
 import { useRecoilState } from "recoil";
-import ClearInputButton from "../../../../AppBar/Search/Input/ClearInputButton";
-import { StyledInput } from "../../../../AppBar/Search/Input/Input";
+import ClearInputButton from "../../../../SearchButton/Input/ClearInputButton";
+import { StyledInput } from "../../../../SearchButton/Input/Input";
 
 const Input: FunctionComponent<{
   inputRef: MutableRefObject<HTMLInputElement | null>;

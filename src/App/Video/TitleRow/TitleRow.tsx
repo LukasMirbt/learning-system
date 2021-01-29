@@ -2,8 +2,6 @@ import React, { FunctionComponent } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
-import { useRecoilValue } from "recoil";
-import { videoPlayerState } from "../VideoElement/useVideoPlayer";
 
 const Title = styled(Typography)`
   display: flex;
@@ -19,9 +17,14 @@ const Title = styled(Typography)`
 const TitleRow: FunctionComponent = () => {
   const location = useLocation();
 
-  const title = location.pathname.split("/")[1].replace(/-+/g, " ");
+  const splitPathname = location.pathname.split("/");
 
-  return <Title variant="h1">{title}</Title>;
+  if (splitPathname.length > 2) {
+    const title = splitPathname[1].replace(/-+/g, " ");
+    return <Title variant="h1">{title}</Title>;
+  } else {
+    return null;
+  }
 };
 
 export default TitleRow;

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { VideoPlayer, videoPlayerState } from "./useVideoPlayer";
+import { setVideoTime, videoPlayerState } from "./useVideoPlayer";
 import { useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
@@ -13,9 +13,13 @@ const useLocationStateToSetVideoTime = () => {
       if (location.state && videoPlayer !== null) {
         const { time } = location.state;
 
+        setVideoTime({ videoPlayer, time });
+        /* 
         if (videoPlayer.canPlay === true) {
           videoPlayer.currentTime = time;
-          await videoPlayer.play();
+          try {
+            await videoPlayer.play();
+          } catch {}
         } else {
           const onCanPlay = async () => {
             videoPlayer.currentTime = time;
@@ -25,7 +29,7 @@ const useLocationStateToSetVideoTime = () => {
             } catch {}
           };
           videoPlayer.once("canplay", onCanPlay);
-        }
+        } */
       }
     };
 

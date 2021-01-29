@@ -1,10 +1,4 @@
-import React, {
-  FunctionComponent,
-  SetStateAction,
-  useEffect,
-  Dispatch,
-  useState,
-} from "react";
+import React, { FunctionComponent, SetStateAction, Dispatch } from "react";
 import styled from "styled-components";
 import MUIModal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
@@ -31,7 +25,6 @@ const MenuItem = styled(Button)`
   box-sizing: border-box;
   width: 100%;
   transition: none;
-
 
   /*   padding: 0.5rem 1rem; */
 `;

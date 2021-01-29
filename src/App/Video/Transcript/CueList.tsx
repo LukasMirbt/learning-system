@@ -4,7 +4,7 @@ import Cue from "./Cue";
 import { videoPlayerState } from "../VideoElement/useVideoPlayer";
 import { useRecoilValue } from "recoil";
 import { Cue as CueType } from "../../Media/Media";
-import { trackID } from "../VideoElement/VideoElement";
+import { trackElementID } from "../VideoElement/VideoElement";
 
 const StyledList = styled.div`
   display: flex;
@@ -32,7 +32,9 @@ const CueList: FunctionComponent<{ cues: CueType[] }> = ({ cues }) => {
 
   useEffect(() => {
     if (videoPlayer !== null) {
-      const trackElement = document.getElementById(trackID) as HTMLTrackElement;
+      const trackElement = document.getElementById(
+        trackElementID
+      ) as HTMLTrackElement;
 
       const onCueChange = (e: Event) => {
         activeCuesRef.current.forEach((cueElement) => {

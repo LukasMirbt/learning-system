@@ -3,7 +3,8 @@ import Form from "./Form";
 import ResultList from "./ResultList/ResultList";
 import Fuse from "fuse.js";
 import { useRecoilValue, atom, selector, useResetRecoilState } from "recoil";
-import cues from "../../Media/View-from-a-blue-moon/cues";
+import viewFromABlueMoonCues from "../../Media/View-from-a-blue-moon/cues";
+import elephantsDreamCues from "../../Media/View-from-a-blue-moon/cues";
 
 const searchOptions = {
   keys: ["text"],
@@ -23,16 +24,12 @@ export const searchTermState = atom({
   default: "",
 });
 
-export const searchableItemsState = atom({
-  key: "searchableItems",
-  default: cues,
-});
-
-export const fuseState = selector({
+export const fuseState = atom({
   key: "fuse",
-  get: ({ get }) => {
-    return new Fuse(get(searchableItemsState), searchOptions);
-  },
+  default: new Fuse(
+    viewFromABlueMoonCues.concat(elephantsDreamCues),
+    searchOptions
+  ),
 });
 
 export const searchResultsState = selector({

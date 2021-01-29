@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect } from "react";
 import { useResetRecoilState } from "recoil";
 import styled from "styled-components";
-import { searchTermState } from "../AppBar/Search/SearchItems";
+import { searchTermState } from "../SearchButton/SearchItems";
 import VirtualizedList from "./VirtualizedList/VirtualizedList";
 
 const Container = styled.div`

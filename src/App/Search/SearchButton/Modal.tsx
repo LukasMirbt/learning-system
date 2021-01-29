@@ -4,7 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import SearchItems from "./SearchItems";
 import Paper from "@material-ui/core/Paper";
 import { useSetRecoilState, useResetRecoilState } from "recoil";
-import { isSearchOpenState } from "./Search";
+import { isSearchOpenState } from "./SearchButton";
 import { searchTermState } from "./SearchItems";
 import Typography from "@material-ui/core/Typography";
 

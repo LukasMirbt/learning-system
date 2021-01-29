@@ -9,10 +9,12 @@ import Typography, { TypographyProps } from "@material-ui/core/Typography";
 type InitialCueProps = TypographyProps<"button", { component: "button" }>;
 
 const InitialCue = styled(Typography)<InitialCueProps>`
-  display: flex;
+  /*   display: flex;
   align-items: flex-start;
   text-align: start;
-  justify-content: flex-start;
+  justify-content: flex-start; */
+
+  text-align: start;
 
   width: calc(100% - 0.25em);
 
@@ -57,9 +59,8 @@ const Cue: FunctionComponent<{
         }
       }}
       key={cue.text}
-    >
-      {cue.text}
-    </StyledCue>
+      dangerouslySetInnerHTML={{ __html: cue.text }}
+    />
   );
 };
 

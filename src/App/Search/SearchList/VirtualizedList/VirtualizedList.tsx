@@ -1,12 +1,12 @@
 import React, { CSSProperties, FunctionComponent } from "react";
 import { VariableSizeList as List } from "react-window";
 import { useRecoilValue } from "recoil";
-import { searchResultsState } from "../../AppBar/Search/SearchItems";
+import { searchResultsState } from "../../SearchButton/SearchItems";
 import Autosizer from "react-virtualized-auto-sizer";
 import {
   SearchableCue,
   SearchableHeading,
-} from "../../AppBar/Search/getSearchableItems";
+} from "../../SearchButton/getSearchableItems";
 import Fuse from "fuse.js";
 import { headerHeight } from "./Header/Header";
 import ItemRenderer from "./ItemRenderer";

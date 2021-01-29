@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import MUIAppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Search from "./Search/Search";
+import SearchButton from "../Search/SearchButton/SearchButton";
 import DrawerButton from "./DrawerButton";
 import HomeLink from "./HomeLink";
 
@@ -29,7 +29,7 @@ const AppBar: FunctionComponent = () => {
           <HomeLink />
         </Row>
 
-        <Search />
+        <SearchButton />
       </StyledToolbar>
     </StyledAppBar>
   );

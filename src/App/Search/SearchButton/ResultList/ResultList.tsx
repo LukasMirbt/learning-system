@@ -17,7 +17,7 @@ import EnterQuery from "./EnterQuery";
 import Item from "./Item";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { Link } from "react-router-dom";
-import { isSearchOpenState } from "../Search";
+import { isSearchOpenState } from "../SearchButton";
 import { SearchableCue, SearchableHeading } from "../getSearchableItems";
 import { shouldSearchTermResetRefState } from "../SearchItems";
 

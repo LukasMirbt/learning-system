@@ -1,8 +1,9 @@
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useContext, useEffect, useRef } from "react";
 import Plyr from "plyr";
 import { useSetRecoilState } from "recoil";
 import { atom } from "recoil";
 import addTranscriptButton from "./addTranscriptButton";
+import { videoElementID } from "./VideoElement";
 
 export const setVideoTime = async (args: {
   videoPlayer: VideoPlayer;
@@ -11,11 +12,12 @@ export const setVideoTime = async (args: {
   const { videoPlayer, time } = args;
   if (videoPlayer.canPlay === true) {
     videoPlayer.currentTime = time;
-    await videoPlayer.play();
+    try {
+      await videoPlayer.play();
+    } catch {}
   } else {
     const onCanPlay = async () => {
       videoPlayer.currentTime = time;
-
       try {
         await videoPlayer.play();
       } catch {}
@@ -47,10 +49,8 @@ const useVideoPlayer = () => {
   const setVideoPlayerRef = useSetRecoilState(videoPlayerState);
   const setIsTranscriptShowing = useSetRecoilState(isTranscriptShowingState);
 
-  const videoPlayerRef = useRef<VideoPlayer | null>(null);
-
   useLayoutEffect(() => {
-    const videoPlayer = new Plyr("#videoPlayer", {
+    const videoPlayer = new Plyr(`#${videoElementID}`, {
       invertTime: false,
       controls: [
         "play-large",
@@ -84,7 +84,6 @@ const useVideoPlayer = () => {
 
     videoPlayer.once("canplay", onCanPlay);
 
-    videoPlayerRef.current = videoPlayer;
     setVideoPlayerRef(videoPlayer);
 
     return () => {
