@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { ThemeContext } from "styled-components";
+import { useTheme } from "styled-components";
 import { useSetRecoilState } from "recoil";
 import { isDrawerOpenState } from "../Drawer/TemporaryDrawer";
 import { useRouteMatch } from "react-router-dom";
@@ -13,7 +13,7 @@ const StyledIconButton = styled(IconButton)`
 `;
 
 const DrawerButton: FunctionComponent = () => {
-  const theme = useContext(ThemeContext);
+  const theme = useTheme();
   const isXLScreen = useMediaQuery(theme.breakpoints.up("xl"));
 
   const setIsDrawerOpen = useSetRecoilState(isDrawerOpenState);

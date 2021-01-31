@@ -1,5 +1,4 @@
 import React, { FunctionComponent, Fragment } from "react";
-import { Concept } from "../../Sections";
 import Paragraphs from "./Paragraphs";
 import ChapterLink from "./ChapterLink";
 import { Chapter } from "../../../../Media/Media";

@@ -3,19 +3,9 @@ import styled from "styled-components";
 import Video from "./Video/Video";
 import Drawer from "./Drawer/Drawer";
 import AppBar from "./AppBar/AppBar";
-import {
-  Route,
-  Switch,
-  Redirect,
-  useLocation,
-  useHistory,
-} from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { videoStructuresState } from "./Drawer/Sections/Sections";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import Search from "./Search/SearchList/SearchList";
 import PageNotFound from "./PageNotFound";
-import captions from "./Media/View-from-a-blue-moon/captions.vtt";
-/* const { remote, ipcRenderer } = window.require("electron"); */
 
 const Main = styled.main`
   display: flex;

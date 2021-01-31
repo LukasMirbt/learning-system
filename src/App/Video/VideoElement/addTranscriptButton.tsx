@@ -1,4 +1,4 @@
-import { VideoPlayer } from "./useVideoPlayer";
+import { VideoPlayer } from "./useVideoPlayer/useVideoPlayer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import ReactDOMServer from "react-dom/server";

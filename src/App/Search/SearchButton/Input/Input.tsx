@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import ClearInputButton from "./ClearInputButton";
 import { isSearchOpenState } from "../SearchButton";
-import { videoPlayerState } from "../../../Video/VideoElement/useVideoPlayer";
+import { videoPlayerState } from "../../../Video/VideoElement/useVideoPlayer/useVideoPlayer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 

@@ -22,12 +22,20 @@ const secondary = "#008fcc";
 const background = "#f9f9f9";
 const borderRadius = "4px";
 
+const transcriptWidth = 300;
+const transcriptMarginLeftREM = 0.5;
+
+const titleRowREM = 4;
+
 const theme = {
   ...MUITheme,
   borderRadius,
   primary,
   secondary,
   background,
+  transcriptWidth,
+  transcriptMarginLeftREM,
+  titleRowREM,
 } as const;
 
 export type ThemeType = typeof theme;

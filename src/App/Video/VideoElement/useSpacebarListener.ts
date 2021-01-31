@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import { videoPlayerState } from "./useVideoPlayer";
+import { videoPlayerState } from "./useVideoPlayer/useVideoPlayer";
 
 const useSpacebarListener = () => {
   const videoPlayer = useRecoilValue(videoPlayerState);

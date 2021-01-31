@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent } from "react";
 import styled, { css } from "styled-components";
 import Typography from "@material-ui/core/Typography";
 import Sections from "./Sections/Sections";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { ThemeContext } from "styled-components";
+import { useTheme } from "styled-components";
 import TemporaryDrawer from "./TemporaryDrawer";
 
 const Container = styled.div`
@@ -45,7 +45,7 @@ export const DrawerComponent = (
 );
 
 const Drawer: FunctionComponent = () => {
-  const theme = useContext(ThemeContext);
+  const theme = useTheme();
 
   const isXLScreen = useMediaQuery(theme.breakpoints.up("xl"));
   return isXLScreen === true ? DrawerComponent : <TemporaryDrawer />;

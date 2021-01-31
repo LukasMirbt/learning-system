@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
-import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
+import { videoPaths } from "../Video";
 
 const Title = styled(Typography)`
   display: flex;
@@ -9,22 +9,22 @@ const Title = styled(Typography)`
   align-items: center;
 
   width: 100%;
-  height: 4rem;
+  height: ${({ theme }) => `${theme.titleRowREM}rem`};
 
   font-size: 1.5rem;
+
+  position: absolute;
+  bottom: -4rem;
+  left: 0;
 `;
 
-const TitleRow: FunctionComponent = () => {
-  const location = useLocation();
+const TitleRow: FunctionComponent<{ path: typeof videoPaths[number] }> = ({
+  path,
+}) => {
+  const splitPath = path.split("/");
+  const title = splitPath[1].replace(/-+/g, " ");
 
-  const splitPathname = location.pathname.split("/");
-
-  if (splitPathname.length > 2) {
-    const title = splitPathname[1].replace(/-+/g, " ");
-    return <Title variant="h1">{title}</Title>;
-  } else {
-    return null;
-  }
+  return <Title variant="h1">{title}</Title>;
 };
 
 export default TitleRow;

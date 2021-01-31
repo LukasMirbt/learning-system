@@ -1,26 +1,26 @@
-import React, { FunctionComponent, useEffect, useContext } from "react";
-import styled from "styled-components";
-import { useRecoilValue } from "recoil";
+import React, { FunctionComponent, useContext } from "react";
+import styled, { css } from "styled-components";
 import dayjs from "dayjs";
 import { StyledNavLink } from "./ChapterLink";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
-import { useHistory } from "react-router-dom";
-import { videoPlayerState } from "../../../../Video/VideoElement/useVideoPlayer";
 import { TitleContext } from "../../Sections";
-import { setVideoTime } from "../../../../Video/VideoElement/useVideoPlayer";
+import useIsActive from "./useIsActive";
 
-const ParagraphLink = styled(StyledNavLink)`
+const isActiveCSS = css`
+  font-weight: bold;
+`;
+
+interface StyledNavLinkProps {
+  sc: {
+    isActive: boolean;
+  };
+}
+
+const StyledParagraphLink = styled(StyledNavLink)<StyledNavLinkProps>`
   border-left: 4px solid transparent;
   margin-left: 2rem;
 
-  /*   &.active {
-    border-left: ${({ theme }) => `4px solid ${theme.secondary}`};
-    font-weight: 400;
-  } */
-
-  /*   &:last-child {
-    margin-bottom: 0;
-  } */
+  ${({ theme, sc: { isActive } }) => (isActive === true ? isActiveCSS : null)}
 `;
 
 type NameProps = TypographyProps<"span", { component: "span" }>;
@@ -37,14 +37,10 @@ const Time = styled.span`
   font-weight: normal;
 `;
 
-const Paragraph: FunctionComponent<{
+const ParagraphLink: FunctionComponent<{
   paragraph: [name: string, startTime: number, endTime: number];
 }> = ({ paragraph }) => {
   const [name, startTime, endTime] = paragraph;
-
-  const videoPlayer = useRecoilValue(videoPlayerState);
-
-  const history = useHistory();
 
   const formattedTime = `${dayjs
     .duration(startTime * 1000)
@@ -52,50 +48,24 @@ const Paragraph: FunctionComponent<{
 
   const title = useContext(TitleContext);
 
-  /*   useEffect(() => {
-    if (videoPlayer !== null) {
-      const onTimeUpdate = () => {
-        const currentTime = videoPlayer.currentTime;
-        if (
-          history.location.pathname !== path &&
-          currentTime >= startTime &&
-          currentTime <= endTime
-        ) {
-          history.push(path);
-        }
-      };
-      videoPlayer.on("timeupdate", onTimeUpdate);
-
-      return () => {
-        videoPlayer.off("timeupdate", onTimeUpdate);
-      };
-    }
-  }, [videoPlayer, startTime, endTime, path, history]); */
+  const isActive = useIsActive({ startTime, endTime });
 
   return (
-    <ParagraphLink
+    <StyledParagraphLink
+      sc={{ isActive }}
       exact
       to={{
         pathname: `/${title}`.replace(/\s+/g, "-"),
         state: { time: startTime },
       }}
-      /*       to={`/${title}`.replace(/\s+/g, "-")}
-      onClick={() => {
-        if (videoPlayer !== null) {
-          setVideoTime({
-            videoPlayer,
-            time: startTime,
-          });
-        }
-      }} */
     >
       <Name variant="h4" component="span">
         {name}
       </Name>
 
       <Time>{formattedTime}</Time>
-    </ParagraphLink>
+    </StyledParagraphLink>
   );
 };
 
-export default Paragraph;
+export default ParagraphLink;

@@ -3,10 +3,14 @@ import styled from "styled-components";
 import VideoElement from "./VideoElement/VideoElement";
 import Transcript from "./Transcript/Transcript";
 import TitleRow from "./TitleRow/TitleRow";
-import useCSSTranscriptToggle from "./useCSSTranscriptToggle";
 import { Switch, Route } from "react-router-dom";
 
-const videoPaths = ["/View-from-a-blue-moon", "/Elephants-dream"] as const;
+export const videoPaths = [
+  "/View-from-a-blue-moon",
+  "/Elephants-dream",
+] as const;
+
+export const titleRowCSSHeight = "4rem";
 
 const Container = styled.div`
   display: flex;
@@ -14,14 +18,19 @@ const Container = styled.div`
   justify-content: flex-start;
   flex-direction: column;
 
-  width: calc(100% - 241px);
-
+  margin: 1.5rem;
   flex-grow: 1;
+
+  width: calc(100% - 3rem);
+  height: calc(100% - 3rem);
+
+  @media screen and (min-width: ${({ theme }) =>
+      theme.breakpoints.values["xl"]}px) {
+    width: calc(100% - 3rem - 241px);
+  }
 
   .plyr {
     --plyr-color-main: ${({ theme }) => theme.primary};
-
-    flex-grow: 1;
   }
 
   .transcriptButton {
@@ -32,54 +41,38 @@ const Container = styled.div`
       display: block;
     }
   }
-
-  padding: 1.5rem;
 `;
 
 const Row = styled.div`
   display: flex;
 
-  width: 100%;
-  max-height: 100%;
-
-  @media screen and (min-width: ${({ theme }) =>
-      theme.breakpoints.values.lg}px) {
-    padding-right: calc(300px + 0.5rem);
-  }
-
-  &.transcriptHidden {
-    padding-right: 0;
-  }
-
   position: relative;
-  max-height: calc(100% - 4rem);
+  margin-bottom: 4rem;
 `;
 
 const Container2 = styled.div`
   display: flex;
-  flex-grow: 1;
+  height: min-content;
 `;
 
 const Video: FunctionComponent = () => {
-  useCSSTranscriptToggle();
-
-
   return (
-    <Container>
-      <Row id="videoRow">
-        <Switch>
-          {videoPaths.map((path) => (
-            <Route key={path} path={path}>
+    <Container id="videoContainer">
+      <Switch>
+        {videoPaths.map((path) => (
+          <Route key={path} path={path}>
+            <Row>
               <Container2>
                 <VideoElement path={path} />
               </Container2>
-            </Route>
-          ))}
-        </Switch>
 
-        <Transcript />
-      </Row>
-      <TitleRow />
+              <Transcript path={path} />
+
+              <TitleRow path={path} />
+            </Row>
+          </Route>
+        ))}
+      </Switch>
     </Container>
   );
 };

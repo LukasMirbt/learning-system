@@ -8,7 +8,7 @@ import { isSearchOpenState } from "../SearchButton";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
-import { videoPlayerState } from "../../../Video/VideoElement/useVideoPlayer";
+import { videoPlayerState } from "../../../Video/VideoElement/useVideoPlayer/useVideoPlayer";
 
 const StyledNavLink = styled(NavLink)`
   ${ClickableHeadingStyle};

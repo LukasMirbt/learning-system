@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
-import { videoPlayerState } from "../VideoElement/useVideoPlayer";
+import { videoPlayerState } from "../VideoElement/useVideoPlayer/useVideoPlayer";
 import { Cue as CueType } from "../../Media/Media";
-import { setVideoTime } from "../VideoElement/useVideoPlayer";
+import setVideoTime from "../VideoElement/setVideoTime";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
 
 type InitialCueProps = TypographyProps<"button", { component: "button" }>;

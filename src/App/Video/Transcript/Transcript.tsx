@@ -1,45 +1,44 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent } from "react";
 import { useMediaQuery } from "@material-ui/core";
-import { ThemeContext } from "styled-components";
+import { useTheme } from "styled-components";
 import SkipLink from "./SkipLink";
-import { isTranscriptShowingState } from "../VideoElement/useVideoPlayer";
-import { useRecoilValue } from "recoil";
 import viewFromABlueMoonCues from "../../Media/View-from-a-blue-moon/cues";
 import elephantsDreamCues from "../../Media/Elephants-dream/cues";
-import { Switch, Route } from "react-router-dom";
 import CueList from "./CueList";
+import { atom, useRecoilValue } from "recoil";
 
-const sources = [
-  {
-    path: "/View-from-a-blue-moon",
+const sources = {
+  "/View-from-a-blue-moon": {
     cues: viewFromABlueMoonCues,
   },
-  {
-    path: "/Elephants-dream",
+  "/Elephants-dream": {
     cues: elephantsDreamCues,
   },
-];
+};
 
-const Transcript: FunctionComponent = () => {
-  const theme = useContext(ThemeContext);
+export const isTranscriptShowingState = atom({
+  key: "isTranscriptShowing",
+  default: true,
+});
+
+const Transcript: FunctionComponent<{ path: keyof typeof sources }> = ({
+  path,
+}) => {
+  const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const isTranscriptShowing = useRecoilValue(isTranscriptShowingState);
 
+  console.log("test");
+
   return (
-    <Switch>
-      {sources.map(({ path, cues }) => {
-        return (
-          <Route key={path} path={path}>
-            {isLargeScreen === true && isTranscriptShowing === true && (
-              <>
-                <SkipLink />
-                <CueList cues={cues} />
-              </>
-            )}
-          </Route>
-        );
-      })}
-    </Switch>
+    <>
+      {isLargeScreen === true && isTranscriptShowing === true && (
+        <>
+          {/*  <SkipLink /> */}
+          <CueList cues={sources[path].cues} />
+        </>
+      )}
+    </>
   );
 };
 
