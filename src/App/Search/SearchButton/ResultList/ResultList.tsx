@@ -7,19 +7,18 @@ import React, {
 import styled from "styled-components";
 import List from "@material-ui/core/List";
 import Fuse from "fuse.js";
-import {
-  searchTermState,
-  selectedItemIndexState,
-  searchResultsState,
-} from "../SearchItems";
 import NoResults from "./NoResults";
 import EnterQuery from "./EnterQuery";
 import Item from "./Item";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { Link } from "react-router-dom";
 import { isSearchOpenState } from "../SearchButton";
-import { SearchableCue, SearchableHeading } from "../getSearchableItems";
-import { shouldSearchTermResetRefState } from "../SearchItems";
+import {
+  shouldSearchTermResetRefState,
+  searchTermState,
+  selectedItemIndexState,
+  searchResultsState,
+} from "../../Search";
 
 export const numberOfResultsToShow = 5;
 
@@ -45,12 +44,6 @@ const ViewAllResults = styled(Link)`
   line-height: 1.25rem;
 `;
 
-export const isCue = (
-  searchable: SearchableCue | SearchableHeading
-): searchable is SearchableCue => {
-  return "startTime" in searchable;
-};
-
 const ResultList: FunctionComponent = () => {
   const searchTerm = useRecoilValue(searchTermState);
   const setSelectedItemIndex = useSetRecoilState(selectedItemIndexState);
@@ -63,22 +56,26 @@ const ResultList: FunctionComponent = () => {
     shouldSearchTermResetRefState
   );
 
+  console.log(searchResults);
+
   useEffect(() => {
     setSelectedItemIndex(0);
   }, [searchResults, setSelectedItemIndex]);
   return (
     <StyledList role="listbox">
-      {searchResults?.slice(0, numberOfResultsToShow).map(({ item }, index) => {
-        return (
-          <Item
-            key={item.text}
-            startTime={item.startTime}
-            endTime={item.endTime}
-            index={index}
-            value={item.text}
-          />
-        );
-      })}
+      {searchResults
+        ?.slice(0, numberOfResultsToShow)
+        .map(({ item, refIndex }, index) => {
+          return (
+            <Item
+              key={refIndex}
+              startTime={item.startTime}
+              endTime={item.endTime}
+              index={index}
+              value={item.text}
+            />
+          );
+        })}
 
       {searchResults.length > 5 && (
         <ViewAllResults

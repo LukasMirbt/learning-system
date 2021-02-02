@@ -4,8 +4,8 @@ import {
   searchTermState,
   selectedItemIndexState,
   searchResultsState,
-} from "../SearchItems";
-import { isCue, numberOfResultsToShow } from "../ResultList/ResultList";
+} from "../../Search";
+import { numberOfResultsToShow } from "../ResultList/ResultList";
 import { useHistory } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import ClearInputButton from "./ClearInputButton";

@@ -59,12 +59,14 @@ const ChapterLink: FunctionComponent<{
     .duration(startTime * 1000)
     .format("m:ss")} - ${dayjs.duration(endTime * 1000).format("m:ss")}`;
 
-  const isActive = useIsActive({ startTime, endTime });
+  const pathname = `/${title}`.replace(/\s+/g, "-");
+
+  const isActive = useIsActive({ startTime, endTime, pathname });
 
   return (
     <StyledNavLink
       to={{
-        pathname: `/${title}`.replace(/\s+/g, "-"),
+        pathname,
         state: { time: startTime },
       }}
     >

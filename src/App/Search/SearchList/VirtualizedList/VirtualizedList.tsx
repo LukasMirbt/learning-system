@@ -1,22 +1,16 @@
 import React, { CSSProperties, FunctionComponent } from "react";
 import { VariableSizeList as List } from "react-window";
 import { useRecoilValue } from "recoil";
-import { searchResultsState } from "../../SearchButton/SearchItems";
+import { searchResultsState } from "../../Search";
 import Autosizer from "react-virtualized-auto-sizer";
-import {
-  SearchableCue,
-  SearchableHeading,
-} from "../../SearchButton/getSearchableItems";
+import { Searchable } from "../../../Media/Media";
 import Fuse from "fuse.js";
 import { headerHeight } from "./Header/Header";
 import ItemRenderer from "./ItemRenderer";
 
 const getItemSize = (index: number) => (index === 0 ? headerHeight : 80);
 
-const getItemKey = (
-  index: number,
-  data: Fuse.FuseResult<SearchableCue | SearchableHeading>[]
-) => {
+const getItemKey = (index: number, data: Fuse.FuseResult<Searchable>[]) => {
   return index === 0 ? "header" : data[index - 1].refIndex;
 };
 

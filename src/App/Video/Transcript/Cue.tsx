@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { videoPlayerState } from "../VideoElement/useVideoPlayer/useVideoPlayer";
-import { Cue as CueType } from "../../Media/Media";
+import { Searchable } from "../../Media/Media";
 import setVideoTime from "../VideoElement/setVideoTime";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
 
@@ -35,7 +35,7 @@ export const StyledCue = styled(InitialCue)`
 `;
 
 const Cue: FunctionComponent<{
-  cue: CueType;
+  cue: Searchable;
   cueIndex: number;
   /*   isLast: boolean;
   style: CSSProperties; */

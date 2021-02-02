@@ -1,15 +1,10 @@
 import Fuse from "fuse.js";
 import { atom, selector } from "recoil";
-import viewFromABlueMoonCues from "../Media/View-from-a-blue-moon/cues";
-import elephantsDreamCues from "../Media/View-from-a-blue-moon/cues";
-
-const searchOptions = {
-  keys: ["text"],
-};
-
-export interface SearchableItem {
-  value: string;
-}
+import viewFromABlueMoonCues from "../Media/View-from-a-blue-moon/searchableCues";
+import viewFromABlueMoonSections from "../Media/View-from-a-blue-moon/searchableSections";
+import elephantsDreamCues from "../Media/Elephants-dream/searchableCues";
+import elephantsDreamSections from "../Media/Elephants-dream/searchableSections";
+import { Searchable } from "../Media/Media";
 
 export const selectedItemIndexState = atom({
   key: "selectedItemIndex",
@@ -21,12 +16,18 @@ export const searchTermState = atom({
   default: "",
 });
 
+const searchableItems = (viewFromABlueMoonSections as Searchable[]).concat(
+  elephantsDreamSections,
+  viewFromABlueMoonCues,
+  elephantsDreamCues
+);
+
+const searchOptions = {
+  keys: ["text"],
+};
 export const fuseState = atom({
   key: "fuse",
-  default: new Fuse(
-    viewFromABlueMoonCues.concat(elephantsDreamCues),
-    searchOptions
-  ),
+  default: new Fuse(searchableItems, searchOptions),
 });
 
 export const searchResultsState = selector({

@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, MutableRefObject } from "react";
-import { searchTermState } from "../../../../SearchButton/SearchItems";
+import { searchTermState } from "../../../../Search";
 import { useRecoilState } from "recoil";
 import ClearInputButton from "../../../../SearchButton/Input/ClearInputButton";
 import { StyledInput } from "../../../../SearchButton/Input/Input";

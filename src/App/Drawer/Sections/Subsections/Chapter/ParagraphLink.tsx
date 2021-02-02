@@ -48,14 +48,16 @@ const ParagraphLink: FunctionComponent<{
 
   const title = useContext(TitleContext);
 
-  const isActive = useIsActive({ startTime, endTime });
+  const pathname = `/${title}`.replace(/\s+/g, "-");
+
+  const isActive = useIsActive({ startTime, endTime, pathname });
 
   return (
     <StyledParagraphLink
       sc={{ isActive }}
       exact
       to={{
-        pathname: `/${title}`.replace(/\s+/g, "-"),
+        pathname,
         state: { time: startTime },
       }}
     >

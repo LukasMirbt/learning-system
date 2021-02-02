@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { NavLink, useHistory } from "react-router-dom";
 import { ClickableHeadingStyle } from "../../../common";
 import ListItem from "@material-ui/core/ListItem";
-import { selectedItemIndexState, searchResultsState } from "../SearchItems";
+import { selectedItemIndexState, searchResultsState } from "../../Search";
 import { isSearchOpenState } from "../SearchButton";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

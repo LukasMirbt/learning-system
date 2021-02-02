@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from "react";
+import React, { FunctionComponent, useEffect, useMemo } from "react";
 import styled from "styled-components";
 import Video from "./Video/Video";
 import Drawer from "./Drawer/Drawer";
@@ -27,9 +27,11 @@ const Main = styled.main`
 
 const App: FunctionComponent = () => {
   const history = useHistory();
+
   useMemo(() => {
     history.replace({ state: null });
   }, [history]);
+
   return (
     <>
       <AppBar />

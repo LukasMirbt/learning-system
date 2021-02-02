@@ -2,10 +2,10 @@ import { DefaultTheme } from "styled-components";
 
 const onResize = (args: {
   theme: DefaultTheme;
-  width: number;
-  height: number;
+  sourceWidth: number;
+  sourceHeight: number;
 }) => {
-  const { theme, width, height } = args;
+  const { theme, sourceWidth, sourceHeight } = args;
   const { titleRowREM } = theme;
 
   const videoContainer = document.getElementById("videoContainer")!;
@@ -30,14 +30,13 @@ const onResize = (args: {
   const availableWidth = videoContainerWidth - transcriptWidth;
   const availableHeight = videoContainerHeight - titleRowHeight;
 
-  const aspectRatio = width / height;
+  const aspectRatio = sourceWidth / sourceHeight;
   const availableRatio = availableWidth / availableHeight;
 
   const videoPlayerContainer = document.getElementById("plyrContainer")!;
 
   if (availableRatio > aspectRatio) {
     const height = `${availableHeight.toFixed(3)}px`;
-
     const width = `${(availableHeight * aspectRatio).toFixed(3)}px`;
 
     videoPlayerContainer.style.height = height;

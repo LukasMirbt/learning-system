@@ -5,16 +5,16 @@ import useResizeOnTranscriptChange from "./useResizeOnTranscriptChange";
 import useResizeListener from "./useResizeListener";
 
 const useManageVideoPlayerDimensions = (args: {
-  width: number;
-  height: number;
+  sourceWidth: number;
+  sourceHeight: number;
 }) => {
-  const { width, height } = args;
+  const { sourceWidth, sourceHeight } = args;
 
   const theme = useTheme();
 
   const onResizeCallback = useCallback(
-    () => onResize({ theme, width, height }),
-    [theme, width, height]
+    () => onResize({ theme, sourceWidth, sourceHeight }),
+    [theme, sourceWidth, sourceHeight]
   );
 
   useResizeOnTranscriptChange(onResizeCallback);

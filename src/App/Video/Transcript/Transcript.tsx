@@ -2,8 +2,8 @@ import React, { FunctionComponent } from "react";
 import { useMediaQuery } from "@material-ui/core";
 import { useTheme } from "styled-components";
 import SkipLink from "./SkipLink";
-import viewFromABlueMoonCues from "../../Media/View-from-a-blue-moon/cues";
-import elephantsDreamCues from "../../Media/Elephants-dream/cues";
+import viewFromABlueMoonCues from "../../Media/View-from-a-blue-moon/searchableCues";
+import elephantsDreamCues from "../../Media/Elephants-dream/searchableCues";
 import CueList from "./CueList";
 import { atom, useRecoilValue } from "recoil";
 
@@ -27,8 +27,6 @@ const Transcript: FunctionComponent<{ path: keyof typeof sources }> = ({
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const isTranscriptShowing = useRecoilValue(isTranscriptShowingState);
-
-  console.log("test");
 
   return (
     <>

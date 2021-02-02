@@ -5,8 +5,7 @@ import SearchItems from "./SearchItems";
 import Paper from "@material-ui/core/Paper";
 import { useSetRecoilState, useResetRecoilState } from "recoil";
 import { isSearchOpenState } from "./SearchButton";
-import { searchTermState } from "./SearchItems";
-import Typography from "@material-ui/core/Typography";
+import { searchTermState } from "../Search";
 
 const StyledModal = styled(Modal)`
   display: flex;
@@ -27,7 +26,6 @@ const Container = styled(Paper)`
   outline: none;
 `;
 
-
 const SearchModal: FunctionComponent = () => {
   const setIsSearchOpen = useSetRecoilState(isSearchOpenState);
   const resetSearchTerm = useResetRecoilState(searchTermState);
@@ -45,7 +43,6 @@ const SearchModal: FunctionComponent = () => {
       role="combobox"
     >
       <Container>
- 
         <SearchItems />
       </Container>
     </StyledModal>

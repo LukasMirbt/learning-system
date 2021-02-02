@@ -2,7 +2,6 @@ import { useLayoutEffect } from "react";
 import Plyr from "plyr";
 import { useSetRecoilState } from "recoil";
 import { atom } from "recoil";
-import addTranscriptButton from "../addTranscriptButton";
 import { videoElementID } from "../VideoElement";
 import { isTranscriptShowingState } from "../../Transcript/Transcript";
 import getOptions from "./getOptions";
@@ -27,8 +26,11 @@ interface InitialVideoPlayer extends VideoPlayer {
   canPlay: boolean;
 }
 
-const useVideoPlayer = (args: { width: number; height: number }) => {
-  const { width, height } = args;
+const useVideoPlayer = (args: {
+  sourceWidth: number;
+  sourceHeight: number;
+}) => {
+  const { sourceWidth, sourceHeight } = args;
   const setVideoPlayerRef = useSetRecoilState(videoPlayerState);
   const setIsTranscriptShowing = useSetRecoilState(isTranscriptShowingState);
 
@@ -36,15 +38,13 @@ const useVideoPlayer = (args: { width: number; height: number }) => {
     const videoPlayer = new Plyr(
       `#${videoElementID}`,
       getOptions({
-        width,
-        height,
+        sourceWidth,
+        sourceHeight,
       })
     ) as InitialVideoPlayer;
 
     videoPlayer.elements.container.id = "plyrContainer";
     videoPlayer.elements.inputs.volume.step = "0.02";
-
-    addTranscriptButton({ videoPlayer, setIsTranscriptShowing });
 
     videoPlayer.canPlay = false;
 
@@ -60,7 +60,7 @@ const useVideoPlayer = (args: { width: number; height: number }) => {
       videoPlayer.destroy();
       setVideoPlayerRef(null);
     };
-  }, [setVideoPlayerRef, setIsTranscriptShowing, width, height]);
+  }, [setVideoPlayerRef, setIsTranscriptShowing, sourceWidth, sourceHeight]);
 };
 
 export default useVideoPlayer;

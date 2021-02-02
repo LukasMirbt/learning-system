@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import styled from "styled-components";
 import "plyr/dist/plyr.css";
 import useLocationStateToSetVideoTime from "./useLocationStateToSetVideoTime";
 import useVideoPlayer from "./useVideoPlayer/useVideoPlayer";
@@ -8,6 +9,7 @@ import viewFromABlueMoonCaptionsSource from "../../Media/View-from-a-blue-moon/c
 import elephantsDreamVideoSource from "../../Media/Elephants-dream/video.mp4";
 import elephantsDreamCaptionsSource from "../../Media/Elephants-dream/captions.vtt";
 import useManageVideoPlayerDimensions from "./useManageVideoPlayerDimensions/useManageVideoPlayerDimensions";
+import useTranscriptToggleButton from "./useTranscriptToggleButton/useTranscriptToggleButton";
 
 export const trackElementID = "videoElement-track";
 export const videoElementID = "videoElement-videoElement";
@@ -17,51 +19,70 @@ const sources = {
     title: "View from a blue moon",
     videoSource: viewFromABlueMoonVideoSource,
     captionsSource: viewFromABlueMoonCaptionsSource,
-    width: 860,
-    height: 480,
+    sourceWidth: 860,
+    sourceHeight: 480,
   },
   "/Elephants-dream": {
     title: "Elephants dream",
     videoSource: elephantsDreamVideoSource,
     captionsSource: elephantsDreamCaptionsSource,
-    width: 1920,
-    height: 1080,
+    sourceWidth: 1920,
+    sourceHeight: 1080,
   },
 };
+
+const Container = styled.div`
+  display: flex;
+  height: min-content;
+
+  .plyr {
+    --plyr-color-main: ${({ theme }) => theme.primary};
+  }
+`;
 
 const VideoElement: FunctionComponent<{ path: keyof typeof sources }> = ({
   path,
 }) => {
-  const { title, captionsSource, videoSource, width, height } = sources[path];
+  const {
+    title,
+    captionsSource,
+    videoSource,
+    sourceWidth,
+    sourceHeight,
+  } = sources[path];
 
-  useVideoPlayer({ width, height });
+  useVideoPlayer({ sourceWidth, sourceHeight });
 
-  useManageVideoPlayerDimensions({ width, height });
+  useTranscriptToggleButton();
+
+  useManageVideoPlayerDimensions({ sourceWidth, sourceHeight });
 
   useLocationStateToSetVideoTime();
 
   useSpacebarListener();
 
   return (
-    <video
-      title={title}
-      id={videoElementID}
-      controls
-      crossOrigin="anonymous"
-      playsInline
-      /*   poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" */
-    >
-      <source src={videoSource} type="video/mp4" />
+    <Container>
+      <video
+        title={title}
+        id={videoElementID}
+        controls
+        crossOrigin="anonymous"
+        playsInline
+        /*   poster="" */
+      >
+        <source src={videoSource} type="video/mp4" />
 
-      <track
-        id={trackElementID}
-        kind="captions"
-        label="English"
-        srcLang="en"
-        src={captionsSource}
-        default
-      />
-    </video>
+        <track
+          id={trackElementID}
+          kind="captions"
+          label="English"
+          srcLang="en"
+          src={captionsSource}
+          default
+        />
+      </video>
+    </Container>
   );
 };
 

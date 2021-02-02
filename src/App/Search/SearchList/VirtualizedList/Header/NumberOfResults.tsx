@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
-import { searchResultsState } from "../../../SearchButton/SearchItems";
+import { searchResultsState } from "../../../Search";
 import Typography from "@material-ui/core/Typography";
 
 const Container = styled(Typography)`

@@ -1,5 +1,5 @@
-const getOptions = (args: { width: number; height: number }) => {
-  const { width, height } = args;
+const getOptions = (args: { sourceWidth: number; sourceHeight: number }) => {
+  const { sourceWidth, sourceHeight } = args;
 
   const options = {
     invertTime: false,
@@ -20,7 +20,7 @@ const getOptions = (args: { width: number; height: number }) => {
     tooltips: {
       controls: true,
     },
-    ratio: `${width}:${height}`,
+    ratio: `${sourceWidth}:${sourceHeight}`,
   };
 
   return options;

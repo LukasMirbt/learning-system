@@ -1,14 +1,15 @@
 import React, { FunctionComponent, CSSProperties } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { SearchableCue } from "../../SearchButton/getSearchableItems";
+import { Searchable } from "../../../Media/Media";
 
 const Container = styled(Link)`
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  /*   align-items: center;
   justify-content: center;
   align-items: flex-start;
-  flex-direction: column;
+  flex-direction: column; */
   font-size: 1.5rem;
   max-width: 1200px;
   border-bottom: ${({ theme }) => `1px solid ${theme.palette.divider}`};
@@ -33,14 +34,19 @@ const Description = styled.div`
 const Row: FunctionComponent<{
   index: number;
   style: CSSProperties;
-  item: SearchableCue;
-}> = ({ index, style, item }) => {
+  item: Searchable;
+}> = ({
+  index,
+  style,
+  item: { text, startTime, endTime, videoTitle, isCue },
+}) => {
+  const path = `/${videoTitle.replace(/\s+/g, "-")}`;
   return (
     <Container
       to={{
-        pathname: item.path,
+        pathname: path,
         state: {
-          time: item.startTime,
+          time: startTime,
         },
       }}
       style={{
@@ -51,8 +57,11 @@ const Row: FunctionComponent<{
       }}
       key={index}
     >
-      <Value>{item.value}</Value>
-      <Description>{`Path: ${item.path}`}</Description>
+      <Value>{text}</Value>
+      <Description>{isCue === true ? "Subtitle" : "Section"}</Description>
+      <Description>
+        {startTime} - {endTime}
+      </Description>
     </Container>
   );
 };
