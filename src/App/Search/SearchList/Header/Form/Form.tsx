@@ -1,18 +1,18 @@
 import React, { FunctionComponent, useRef } from "react";
 import styled from "styled-components";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Input from "./Input";
-import { Container, SearchIcon } from "../../../../SearchButton/Form";
 
-const StyledContainer = styled(Container)`
+const StyledForm = styled.form`
   margin-top: 1rem;
+  align-items: flex-start;
+  justify-content: center;
 `;
 
 const Form: FunctionComponent = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <StyledContainer
+    <StyledForm
       role="search"
       onSubmit={(e) => {
         e.preventDefault();
@@ -23,7 +23,7 @@ const Form: FunctionComponent = () => {
       </StyledLabel> */}
 
       <Input inputRef={inputRef} />
-    </StyledContainer>
+    </StyledForm>
   );
 };
 

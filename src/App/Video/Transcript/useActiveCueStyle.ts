@@ -2,11 +2,19 @@ import React, { useRef, useEffect } from "react";
 import { videoPlayerState } from "../VideoElement/useVideoPlayer/useVideoPlayer";
 import { useRecoilValue } from "recoil";
 import { trackElementID } from "../VideoElement/VideoElement";
+import { atom } from "recoil";
+
+export const isAutoScrollEnabledState = atom({
+  key: "isAutoScrollEnabled",
+  default: true,
+});
 
 const useActiveCueStyle = () => {
   const videoPlayer = useRecoilValue(videoPlayerState);
 
   const activeCuesRef = useRef<HTMLElement[]>([]);
+
+  const isAutoScrollEnabled = useRecoilValue(isAutoScrollEnabledState);
 
   useEffect(() => {
     if (videoPlayer !== null) {
@@ -24,7 +32,7 @@ const useActiveCueStyle = () => {
             const cueElement = document.getElementById(`cue${cue.id}`)!;
             cueElement.classList.add("current");
 
-            if (index === arr.length - 1) {
+            if (isAutoScrollEnabled === true && index === arr.length - 1) {
               cueElement.scrollIntoView({
                 behavior: "smooth",
                 block: "center",
@@ -56,7 +64,7 @@ const useActiveCueStyle = () => {
         };
       }
     }
-  }, [videoPlayer]);
+  }, [videoPlayer, isAutoScrollEnabled]);
 };
 
 export default useActiveCueStyle;

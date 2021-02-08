@@ -6,30 +6,27 @@ import { Searchable } from "../../Media/Media";
 import setVideoTime from "../VideoElement/setVideoTime";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
 
-type InitialCueProps = TypographyProps<"button", { component: "button" }>;
+type StyledCueProps = TypographyProps<"button", { component: "button" }>;
 
-const InitialCue = styled(Typography)<InitialCueProps>`
-  /*   display: flex;
-  align-items: flex-start;
+const StyledCue = styled(Typography)<StyledCueProps>`
   text-align: start;
-  justify-content: flex-start; */
-
-  text-align: start;
-
   width: calc(100% - 0.25em);
+  padding: 0.25rem 0;
+  min-height: 3rem;
 
-  padding: 0;
-`;
-
-export const StyledCue = styled(InitialCue)`
+  outline: none;
   &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &:focus-visible {
     background-color: rgba(0, 0, 0, 0.08);
   }
 
   &.current {
-    background-color: rgba(0, 0, 0, 0.16);
+    background-color: rgba(0, 0, 0, 0.08);
     &:hover {
-      background-color: rgba(0, 0, 0, 0.24);
+      background-color: rgba(0, 0, 0, 0.12);
     }
   }
 `;
@@ -37,8 +34,6 @@ export const StyledCue = styled(InitialCue)`
 const Cue: FunctionComponent<{
   cue: Searchable;
   cueIndex: number;
-  /*   isLast: boolean;
-  style: CSSProperties; */
 }> = ({ cue, cueIndex }) => {
   const videoPlayer = useRecoilValue(videoPlayerState);
 
@@ -47,9 +42,7 @@ const Cue: FunctionComponent<{
       variant="body1"
       component="button"
       id={`cue${cueIndex}`}
-      /*  style={style} */
       type="button"
-      /*   id={isLast ? "#endOfTranscript" : undefined} */
       onClick={() => {
         if (videoPlayer !== null) {
           setVideoTime({

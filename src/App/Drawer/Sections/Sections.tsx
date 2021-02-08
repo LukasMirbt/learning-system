@@ -6,6 +6,7 @@ import Subsections from "./Subsections/Subsections";
 import viewFromABlueMoonStructure from "../../Media/View-from-a-blue-moon/videoStructure";
 import elephantsDreamStructure from "../../Media/Elephants-dream/videoStructure";
 import { VideoStructure } from "../../Media/Media";
+import { drawerLabelID } from "../Drawer";
 
 type NonEmptyArray<T> = [T, ...T[]];
 
@@ -32,7 +33,7 @@ export const videoStructuresState = atom<VideoStructure[]>({
   default: [viewFromABlueMoonStructure, elephantsDreamStructure],
 });
 
-const Container = styled.div``;
+const Container = styled.nav``;
 
 const titleCSS = css`
   font-weight: 500;
@@ -43,7 +44,7 @@ export const TitleContext = createContext("");
 const Sections: FunctionComponent = () => {
   const videoStructures = useRecoilValue(videoStructuresState);
   return (
-    <Container>
+    <Container aria-labelledby={drawerLabelID}>
       {videoStructures.map(({ title, sections }, index) => {
         const ID = `${title}${index}`.replace(/\s+/g, "-");
         return (

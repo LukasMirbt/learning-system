@@ -24,12 +24,12 @@ const Link = styled.button`
   }
 `;
 
-const SkipLink: FunctionComponent = () => {
+const SkipLink: FunctionComponent<{ lastCueID: string }> = ({ lastCueID }) => {
   return (
     <Link
       type="button"
       onClick={() => {
-        document.getElementById("#endOfTranscript")?.focus();
+        document.getElementById(lastCueID)!.focus();
       }}
     >
       Skip to end of transcript

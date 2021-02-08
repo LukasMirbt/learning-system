@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useMemo } from "react";
+import React, { FunctionComponent, useMemo } from "react";
 import styled from "styled-components";
 import Video from "./Video/Video";
 import Drawer from "./Drawer/Drawer";
@@ -7,7 +7,7 @@ import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import Search from "./Search/SearchList/SearchList";
 import PageNotFound from "./PageNotFound";
 
-const Main = styled.main`
+const Container = styled.div`
   display: flex;
   justify-content: space-between;
 
@@ -36,7 +36,7 @@ const App: FunctionComponent = () => {
     <>
       <AppBar />
 
-      <Main>
+      <Container>
         <Switch>
           <Route path="/search">
             <Search />
@@ -55,7 +55,7 @@ const App: FunctionComponent = () => {
             <PageNotFound />
           </Route>
         </Switch>
-      </Main>
+      </Container>
     </>
   );
 };

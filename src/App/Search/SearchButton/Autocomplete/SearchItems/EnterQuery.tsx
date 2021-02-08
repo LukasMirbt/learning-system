@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { faFeather } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
+import { useRecoilValue } from "recoil";
+import { searchTermState } from "../../../Search";
 
 const Container = styled.div`
   color: rgba(0, 0, 0, 0.75);
@@ -26,14 +28,16 @@ const Text = styled(Typography)<TextProps>`
 `;
 
 const EnterQuery: FunctionComponent = () => {
-  return (
+  const searchTerm = useRecoilValue(searchTermState);
+
+  return searchTerm === "" ? (
     <Container>
       <Text variant="h5" component="p">
         Enter a query
       </Text>
       <WriteIcon icon={faFeather} />
     </Container>
-  );
+  ) : null;
 };
 
 export default EnterQuery;

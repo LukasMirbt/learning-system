@@ -44,6 +44,7 @@ const useVideoPlayer = (args: {
     ) as InitialVideoPlayer;
 
     videoPlayer.elements.container.id = "plyrContainer";
+    videoPlayer.elements.container.tabIndex = -1;
     videoPlayer.elements.inputs.volume.step = "0.02";
 
     videoPlayer.canPlay = false;

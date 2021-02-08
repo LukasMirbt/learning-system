@@ -38,6 +38,11 @@ const Container = styled.div`
   .plyr {
     --plyr-color-main: ${({ theme }) => theme.primary};
   }
+
+  //Volume control has incorrect width without this on Firefox
+  .plyr__volume input[type="range"] {
+    width: calc(100% - 32px - 10px);
+  }
 `;
 
 const VideoElement: FunctionComponent<{ path: keyof typeof sources }> = ({

@@ -1,8 +1,8 @@
 import React, { FunctionComponent, SetStateAction, Dispatch } from "react";
-import { ClickableHeading } from "../common";
 import styled, { FlattenSimpleInterpolation } from "styled-components";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
 import Chevron from "./Chevron";
+import ListItem from "@material-ui/core/ListItem";
 
 type TitleProps = TypographyProps<"span", { component: "span" }> & {
   sc: { titleCSS: FlattenSimpleInterpolation | undefined };
@@ -22,10 +22,15 @@ interface ContainerProps {
   };
 }
 
-const Container = styled(ClickableHeading)<ContainerProps>`
+const Container = styled(ListItem)<ContainerProps>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   width: 100%;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  min-height: 2.25rem;
+
+  padding: 0.25rem 1rem;
 
   ${({ sc: { headerCSS } }) => headerCSS ?? null}
 `;
@@ -44,7 +49,6 @@ const AccordionHeader: FunctionComponent<{
         setIsExpanded((prevIsExpanded) => !prevIsExpanded);
       }}
       button
-      disableTouchRipple
       aria-disabled="false"
       aria-expanded={isExpanded}
       aria-controls={`${ID}-content`}

@@ -16,7 +16,7 @@ export const searchTermState = atom({
   default: "",
 });
 
-const searchableItems = (viewFromABlueMoonSections as Searchable[]).concat(
+export const searchableItems = (viewFromABlueMoonSections as Searchable[]).concat(
   elephantsDreamSections,
   viewFromABlueMoonCues,
   elephantsDreamCues
@@ -25,6 +25,7 @@ const searchableItems = (viewFromABlueMoonSections as Searchable[]).concat(
 const searchOptions = {
   keys: ["text"],
 };
+
 export const fuseState = atom({
   key: "fuse",
   default: new Fuse(searchableItems, searchOptions),
@@ -39,6 +40,6 @@ export const searchResultsState = selector({
 
 export const shouldSearchTermResetRefState = atom({
   key: "shouldSearchTermResetRef",
-  default: { value: false },
+  default: { current: false },
   dangerouslyAllowMutability: true,
 });

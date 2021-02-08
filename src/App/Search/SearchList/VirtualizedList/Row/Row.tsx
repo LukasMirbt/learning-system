@@ -1,34 +1,24 @@
 import React, { FunctionComponent, CSSProperties } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Searchable } from "../../../Media/Media";
+import { Searchable } from "../../../../Media/Media";
+import StartColumn from "./StartColumn";
+import EndColumn from "./EndColumn";
 
 const Container = styled(Link)`
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  /*   align-items: center;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column; */
+
   font-size: 1.5rem;
   max-width: 1200px;
   border-bottom: ${({ theme }) => `1px solid ${theme.palette.divider}`};
 
-  &:nth-child(2) {
-    border-top: ${({ theme }) => `1px solid ${theme.palette.divider}`};
-  }
-
   padding: 0 1rem;
 
   &:hover {
-    color: ${({ theme }) => theme.secondary};
+    background-color: rgba(0, 0, 0, 0.04);
   }
-`;
-
-const Value = styled.div``;
-
-const Description = styled.div`
-  font-size: 1rem;
 `;
 
 const Row: FunctionComponent<{
@@ -41,6 +31,7 @@ const Row: FunctionComponent<{
   item: { text, startTime, endTime, videoTitle, isCue },
 }) => {
   const path = `/${videoTitle.replace(/\s+/g, "-")}`;
+
   return (
     <Container
       to={{
@@ -57,11 +48,13 @@ const Row: FunctionComponent<{
       }}
       key={index}
     >
-      <Value>{text}</Value>
-      <Description>{isCue === true ? "Subtitle" : "Section"}</Description>
-      <Description>
-        {startTime} - {endTime}
-      </Description>
+      <StartColumn text={text} isCue={isCue} />
+
+      <EndColumn
+        startTime={startTime}
+        endTime={endTime}
+        videoTitle={videoTitle}
+      />
     </Container>
   );
 };

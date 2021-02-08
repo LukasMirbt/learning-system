@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
 import { videoPaths } from "../Video";
 
+export const videoLabelID = "videoLabel";
+
 const Title = styled(Typography)`
   display: flex;
   justify-content: space-between;
@@ -24,7 +26,11 @@ const TitleRow: FunctionComponent<{ path: typeof videoPaths[number] }> = ({
   const splitPath = path.split("/");
   const title = splitPath[1].replace(/-+/g, " ");
 
-  return <Title variant="h1">{title}</Title>;
+  return (
+    <Title id="videoLabel" variant="h1">
+      {title}
+    </Title>
+  );
 };
 
 export default TitleRow;

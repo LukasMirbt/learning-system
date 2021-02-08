@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { faFlag } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
+import { useRecoilValue } from "recoil";
+import { searchResultsState, searchTermState } from "../../../Search";
 
 const Container = styled.div`
   color: rgba(0, 0, 0, 0.75);
@@ -35,10 +37,12 @@ const BoldText = styled(Typography)<BoldTextProps>`
   word-break: break-all;
 `;
 
-const NoResults: FunctionComponent<{ searchTerm: string }> = ({
-  searchTerm,
-}) => {
-  return (
+const NoResults: FunctionComponent = () => {
+  const searchTerm = useRecoilValue(searchTermState);
+
+  const searchResults = useRecoilValue(searchResultsState);
+
+  return searchResults.length === 0 && searchTerm !== "" ? (
     <Container>
       <Icon icon={faFlag} />
       <Text variant="h5" component="p">
@@ -48,7 +52,7 @@ const NoResults: FunctionComponent<{ searchTerm: string }> = ({
         </BoldText>
       </Text>
     </Container>
-  );
+  ) : null;
 };
 
 export default NoResults;

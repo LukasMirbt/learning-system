@@ -1,7 +1,9 @@
+import plyrSprite from "./plyrSprite.svg";
+
 const getOptions = (args: { sourceWidth: number; sourceHeight: number }) => {
   const { sourceWidth, sourceHeight } = args;
 
-  const options = {
+  const options: Plyr.Options = {
     invertTime: false,
     controls: [
       "play-large",
@@ -16,6 +18,7 @@ const getOptions = (args: { sourceWidth: number; sourceHeight: number }) => {
       "airplay",
       "fullscreen",
     ],
+    iconUrl: plyrSprite,
     captions: { active: true },
     tooltips: {
       controls: true,

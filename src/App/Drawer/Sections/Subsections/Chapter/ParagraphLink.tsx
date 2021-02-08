@@ -1,14 +1,11 @@
 import React, { FunctionComponent, useContext } from "react";
 import styled, { css } from "styled-components";
 import dayjs from "dayjs";
-import { StyledNavLink } from "./ChapterLink";
+import { StyledChapterLink } from "./ChapterLink";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
 import { TitleContext } from "../../Sections";
 import useIsActive from "./useIsActive";
-
-const isActiveCSS = css`
-  font-weight: bold;
-`;
+import { useHistory } from "react-router-dom";
 
 interface StyledNavLinkProps {
   sc: {
@@ -16,11 +13,12 @@ interface StyledNavLinkProps {
   };
 }
 
-const StyledParagraphLink = styled(StyledNavLink)<StyledNavLinkProps>`
+const StyledParagraphLink = styled(StyledChapterLink)<StyledNavLinkProps>`
   border-left: 4px solid transparent;
   margin-left: 2rem;
 
-  ${({ theme, sc: { isActive } }) => (isActive === true ? isActiveCSS : null)}
+  font-weight: ${({ sc: { isActive } }) =>
+    isActive === true ? "bold" : "normal"};
 `;
 
 type NameProps = TypographyProps<"span", { component: "span" }>;
@@ -42,9 +40,13 @@ const ParagraphLink: FunctionComponent<{
 }> = ({ paragraph }) => {
   const [name, startTime, endTime] = paragraph;
 
-  const formattedTime = `${dayjs
+  const formattedStartTime = dayjs
     .duration(startTime * 1000)
-    .format("m:ss")} - ${dayjs.duration(endTime * 1000).format("m:ss")}`;
+    .format(startTime >= 3600 ? "H:mm:ss" : "mm:ss");
+
+  const formattedEndTime = dayjs
+    .duration(endTime * 1000)
+    .format(endTime >= 3600 ? "H:mm:ss" : "mm:ss");
 
   const title = useContext(TitleContext);
 
@@ -52,20 +54,23 @@ const ParagraphLink: FunctionComponent<{
 
   const isActive = useIsActive({ startTime, endTime, pathname });
 
+  const history = useHistory();
+
   return (
     <StyledParagraphLink
+      button
       sc={{ isActive }}
-      exact
-      to={{
-        pathname,
-        state: { time: startTime },
+      onClick={() => {
+        history.push(pathname, {
+          time: startTime,
+        });
       }}
     >
       <Name variant="h4" component="span">
         {name}
       </Name>
 
-      <Time>{formattedTime}</Time>
+      <Time>{`${formattedStartTime} - ${formattedEndTime}`}</Time>
     </StyledParagraphLink>
   );
 };

@@ -6,6 +6,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "styled-components";
 import TemporaryDrawer from "./TemporaryDrawer";
 
+export const drawerLabelID = "drawerLabel";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -39,7 +41,9 @@ const Title = styled(Typography)`
 
 export const DrawerComponent = (
   <Container>
-    <Title variant="h2">Sections</Title>
+    <Title id={drawerLabelID} variant="h2">
+      Video sections
+    </Title>
     <Sections />
   </Container>
 );

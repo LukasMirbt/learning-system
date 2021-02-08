@@ -3,23 +3,20 @@ import styled from "styled-components";
 import { Switch, Route } from "react-router-dom";
 import VideoElement from "./VideoElement/VideoElement";
 import Transcript from "./Transcript/Transcript";
-import TitleRow from "./TitleRow/TitleRow";
+import VideoTitle, { videoLabelID } from "./VideoTitle/VideoTitle";
 
 export const videoPaths = [
   "/View-from-a-blue-moon",
   "/Elephants-dream",
 ] as const;
 
-export const titleRowCSSHeight = "4rem";
-
-const Container = styled.div`
+const Container = styled.main`
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
 
   margin: 1.5rem;
-  flex-grow: 1;
 
   width: calc(100% - 3rem);
   height: calc(100% - 3rem);
@@ -39,7 +36,7 @@ const Row = styled.div`
 
 const Video: FunctionComponent = () => {
   return (
-    <Container id="videoContainer">
+    <Container aria-labelledby={videoLabelID} id="videoContainer">
       <Switch>
         {videoPaths.map((path) => (
           <Route key={path} path={path}>
@@ -48,7 +45,7 @@ const Video: FunctionComponent = () => {
 
               <Transcript path={path} />
 
-              <TitleRow path={path} />
+              <VideoTitle path={path} />
             </Row>
           </Route>
         ))}

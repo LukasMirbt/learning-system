@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { useMediaQuery } from "@material-ui/core";
 import { useTheme } from "styled-components";
-import SkipLink from "./SkipLink";
 import viewFromABlueMoonCues from "../../Media/View-from-a-blue-moon/searchableCues";
 import elephantsDreamCues from "../../Media/Elephants-dream/searchableCues";
 import CueList from "./CueList";
@@ -28,16 +27,9 @@ const Transcript: FunctionComponent<{ path: keyof typeof sources }> = ({
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const isTranscriptShowing = useRecoilValue(isTranscriptShowingState);
 
-  return (
-    <>
-      {isLargeScreen === true && isTranscriptShowing === true && (
-        <>
-          {/*  <SkipLink /> */}
-          <CueList cues={sources[path].cues} />
-        </>
-      )}
-    </>
-  );
+  return isLargeScreen === true && isTranscriptShowing === true ? (
+    <CueList cues={sources[path].cues} />
+  ) : null;
 };
 
 export default Transcript;
