@@ -3,7 +3,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isSearchOpenState } from "../../ButtonWithSearchDialog";
-import { searchResultsState } from "../../../Search";
+import {
+  searchResultsState,
+  shouldSearchTermResetRefState,
+} from "../../../Search";
 
 const StyledLink = styled(Link)`
   align-self: center;
@@ -18,9 +21,14 @@ const ViewAllResults: FunctionComponent = () => {
   const searchResults = useRecoilValue(searchResultsState);
   const setIsSearchOpen = useSetRecoilState(isSearchOpenState);
 
+  const shouldSearchTermResetRef = useRecoilValue(
+    shouldSearchTermResetRefState
+  );
+
   return searchResults !== null && searchResults.length > 5 ? (
     <StyledLink
       onClick={() => {
+        shouldSearchTermResetRef.current = false;
         setIsSearchOpen(false);
       }}
       to="/search"

@@ -33,8 +33,8 @@ const Modal: FunctionComponent = () => {
 
   useEffect(() => {
     return () => {
-      if (shouldSearchTermResetRef.current === true) {
-        shouldSearchTermResetRef.current = false;
+      if (shouldSearchTermResetRef.current === false) {
+        shouldSearchTermResetRef.current = true;
         return;
       } else {
         resetSearchTerm();

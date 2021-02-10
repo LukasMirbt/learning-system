@@ -1,9 +1,12 @@
 import React, { FunctionComponent, useEffect } from "react";
-import { useResetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 import styled from "styled-components";
-import { searchTermState } from "../Search";
+import { searchResultsState, searchTermState } from "../Search";
 import VirtualizedList from "./VirtualizedList/VirtualizedList";
 import Header from "./Header/Header";
+import Typography from "@material-ui/core/Typography";
+import { searchListHeadingLabel } from "./SearchListHeading";
+import SearchListHeading from "./SearchListHeading";
 
 const Container = styled.div`
   width: 100%;
@@ -20,7 +23,16 @@ const ListContainer = styled.div`
   height: 100%;
 `;
 
-const Search: FunctionComponent = () => {
+const StyledSection = styled.section`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const SearchList: FunctionComponent = () => {
   const resetSearchTerm = useResetRecoilState(searchTermState);
 
   useEffect(() => {
@@ -32,11 +44,14 @@ const Search: FunctionComponent = () => {
   return (
     <Container>
       <Header />
-      <ListContainer>
-        <VirtualizedList />
-      </ListContainer>
+      <StyledSection aria-labelledby={searchListHeadingLabel}>
+        <SearchListHeading />
+        <ListContainer>
+          <VirtualizedList />
+        </ListContainer>
+      </StyledSection>
     </Container>
   );
 };
 
-export default Search;
+export default SearchList;

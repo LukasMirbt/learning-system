@@ -1,20 +1,28 @@
-import React, { FunctionComponent, MutableRefObject } from "react";
+import React, { FunctionComponent, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { searchTermState } from "../../../Search";
 import { useRecoilState } from "recoil";
 import ClearInputButton from "./InputItems/ClearInputButton";
 import SearchIcon from "./InputItems/SearchIcon";
 
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 0.25rem;
+  position: relative;
+`;
+
 const StyledInput = styled.input`
   border: ${({ theme }) => `2px solid ${theme.primary}`};
   height: 56px;
   width: 100%;
+
   font-size: 1.25rem;
   border-radius: 4px;
 
   &[type="search"] {
     padding: 0;
-    padding-left: 2.25rem;
+    padding-left: 2.5rem;
     padding-right: 2.75rem;
   }
 
@@ -29,25 +37,26 @@ const StyledInput = styled.input`
   }
 `;
 
-const Input: FunctionComponent<{
-  inputRef: MutableRefObject<HTMLInputElement | null>;
-}> = ({ inputRef }) => {
+const Input: FunctionComponent = () => {
   const [searchTerm, setSearchTerm] = useRecoilState(searchTermState);
 
-  /*   useEffect(() => {
-    inputRef.current?.focus();
-  }, [inputRef]); */
+  const ref = useRef<HTMLInputElement | null>(null);
+
+  console.log(searchTerm);
+
+  useEffect(() => {
+    ref.current?.focus();
+  }, [ref]);
 
   return (
-    <>
+    <Container>
       <StyledInput
         id="search-input"
-        ref={inputRef}
+        ref={ref}
         value={searchTerm}
         onChange={(e) => {
           setSearchTerm(e.target.value);
         }}
-        aria-autocomplete="list"
         aria-labelledby="search-label"
         /*  aria-label="Search in videos and headings" */
         autoComplete="off"
@@ -58,8 +67,8 @@ const Input: FunctionComponent<{
         maxLength={64}
       />
       <SearchIcon />
-      <ClearInputButton inputRef={inputRef} />
-    </>
+      <ClearInputButton inputRef={ref} />
+    </Container>
   );
 };
 

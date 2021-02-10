@@ -15,8 +15,8 @@ import {
 import { AutocompleteRenderInputParams } from "@material-ui/lab/Autocomplete";
 import MUITextField from "@material-ui/core/TextField";
 import { searchTermState } from "../../Search";
-import ClearInputButton from "../../SearchList/Header/Form/InputItems/ClearInputButton";
-import SearchIcon from "../../SearchList/Header/Form/InputItems/SearchIcon";
+import ClearInputButton from "../../SearchList/Header/Input/InputItems/ClearInputButton";
+import SearchIcon from "../../SearchList/Header/Input/InputItems/SearchIcon";
 
 export const searchLabelText = "Search in sections and video subtitles";
 
@@ -47,7 +47,7 @@ const StyledTextField = styled(MUITextField)`
   }
 
   .InputLabel {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 
     font-size: 1.5rem;
     display: flex;

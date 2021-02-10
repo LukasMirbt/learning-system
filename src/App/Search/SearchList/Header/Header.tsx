@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useEffect, useMemo } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
-import Form from "./Form/Form";
 import NumberOfResults from "./NumberOfResults";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
 import { useRecoilValue } from "recoil";
 import { searchTermState } from "../../Search";
+import Input from "./Input/Input";
 
 export const headerHeight = 108;
 
@@ -25,7 +25,7 @@ const FormContainer = styled.div`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /*   justify-content: center; */
   width: 100%;
   max-width: 1200px;
 
@@ -35,26 +35,24 @@ const Column = styled.div`
 type LabelProps = TypographyProps<"label", { component: "label" }>;
 
 const Label = styled(Typography)<LabelProps>`
-  font-size: 2rem;
+  font-size: 1.25rem;
   margin-top: 1rem;
-  display: flex;
-  justify-content: center;
 `;
 
 const Header: FunctionComponent = () => {
   return (
     <FormContainer>
-      <Label
-        component="label"
-        htmlFor="search-input"
-        id="search-label"
-        variant="h3"
-      >
-        Search in sections and video subtitles
-      </Label>
       <Column>
-        <Form />
-        <NumberOfResults />
+        <Label
+          component="label"
+          htmlFor="search-input"
+          id="search-label"
+          variant="h3"
+        >
+          Search in sections and video subtitles
+        </Label>
+        <Input />
+        {/*      <NumberOfResults /> */}
       </Column>
     </FormContainer>
   );

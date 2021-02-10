@@ -5,6 +5,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import IconButton from "@material-ui/core/IconButton";
 import { selector, useSetRecoilState, useRecoilValue } from "recoil";
 import { searchTermState } from "../../../../Search";
+import ClearIcon from "@material-ui/icons/Clear";
 
 const shouldShowClearInputButtonState = selector({
   key: "shouldShowClearInputButton",
@@ -38,6 +39,10 @@ const ClearSearchIcon = styled(FontAwesomeIcon)`
   }
 `;
 
+const StyledClearIcon = styled(ClearIcon)`
+  font-size: 1.375rem;
+`;
+
 const ClearInputButton: FunctionComponent<{
   inputRef: MutableRefObject<HTMLInputElement | null>;
 }> = ({ inputRef }) => {
@@ -48,6 +53,7 @@ const ClearInputButton: FunctionComponent<{
   );
   return (
     <StyledButton
+      tabIndex={-1}
       sc={{ shouldShowClearInputButton }}
       onClick={() => {
         setSearchTerm("");
@@ -56,7 +62,7 @@ const ClearInputButton: FunctionComponent<{
       type="reset"
       aria-label="Clear search query"
     >
-      <ClearSearchIcon icon={faTimes} />
+      <StyledClearIcon />
     </StyledButton>
   );
 };

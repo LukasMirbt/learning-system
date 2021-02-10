@@ -5,16 +5,13 @@ import { useLocation } from "react-router-dom";
 
 export const transcriptLabelID = "transcriptLabel";
 
-const Container = styled.div`
+const StyledTitle = styled(Typography)`
+  font-size: 1.25rem;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const StyledTitle = styled(Typography)`
-  font-size: 1.25rem;
-  margin-bottom: 0.25rem;
 `;
 
 type StyledVideoTitleProps = TypographyProps<"span", { component: "span" }>;
@@ -22,6 +19,7 @@ type StyledVideoTitleProps = TypographyProps<"span", { component: "span" }>;
 const StyledVideoTitle = styled(Typography)<StyledVideoTitleProps>`
   font-size: 1rem;
   font-style: italic;
+  margin-top: 0.25rem;
 `;
 
 const Title: FunctionComponent = () => {
@@ -30,13 +28,12 @@ const Title: FunctionComponent = () => {
   const title = splitPath[1].replace(/-+/g, " ");
 
   return (
-    <Container id={transcriptLabelID}>
-      <StyledTitle variant="h2">Transcript</StyledTitle>
-
+    <StyledTitle id={transcriptLabelID} variant="h2">
+      Transcript
       <StyledVideoTitle variant="subtitle1" component="span">
         {title}
       </StyledVideoTitle>
-    </Container>
+    </StyledTitle>
   );
 };
 

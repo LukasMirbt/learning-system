@@ -3,8 +3,7 @@ import styled from "styled-components";
 
 const Link = styled.button`
   position: absolute;
-  top: -100%;
-  right: 0rem;
+  transform: translateY(-100vh);
   padding: 0.25rem;
 
   font-size: 0.875rem;
@@ -16,7 +15,9 @@ const Link = styled.button`
   font-family: inherit;
 
   &:focus {
-    top: 0;
+    transform: unset;
+    top: 100px;
+    right: 0;
     background-color: white;
     height: 50px;
     width: calc(300px + 0.5rem);

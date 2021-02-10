@@ -5,6 +5,7 @@ import { Searchable } from "../../Media/Media";
 import useActiveCueStyle from "./useActiveCueStyle";
 import TranscriptHeader from "./TranscriptHeader/TranscriptHeader";
 import { useHistory } from "react-router-dom";
+import { transcriptLabelID } from "./TranscriptHeader/TranscriptTitle";
 
 const Container = styled.section`
   display: flex;
@@ -32,10 +33,7 @@ const CueList: FunctionComponent<{ cues: Searchable[] }> = ({ cues }) => {
   const videoTitle = splitPath[1].replace(/-+/g, " ");
 
   return (
-    <Container
-      aria-label={`Transcript of ${videoTitle}`}
-      id="transcriptContainer"
-    >
+    <Container aria-labelledby={transcriptLabelID} id="transcriptContainer">
       <TranscriptHeader lastCueID={`cue${cues.length - 1}`} />
 
       <TranscriptContainer>

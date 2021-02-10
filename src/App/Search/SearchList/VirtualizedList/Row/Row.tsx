@@ -1,11 +1,12 @@
 import React, { FunctionComponent, CSSProperties } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Searchable } from "../../../../Media/Media";
 import StartColumn from "./StartColumn";
 import EndColumn from "./EndColumn";
+import ListItem from "@material-ui/core/ListItem";
 
-const Container = styled(Link)`
+const Container = styled(ListItem)`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -30,15 +31,15 @@ const Row: FunctionComponent<{
   style,
   item: { text, startTime, endTime, videoTitle, isCue },
 }) => {
-  const path = `/${videoTitle.replace(/\s+/g, "-")}`;
+  const history = useHistory();
 
   return (
     <Container
-      to={{
-        pathname: path,
-        state: {
+      button
+      onClick={() => {
+        history.push(`/${videoTitle.replace(/\s+/g, "-")}`, {
           time: startTime,
-        },
+        });
       }}
       style={{
         ...style,
