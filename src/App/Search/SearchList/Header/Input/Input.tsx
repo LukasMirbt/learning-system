@@ -4,6 +4,9 @@ import { searchTermState } from "../../../Search";
 import { useRecoilState } from "recoil";
 import ClearInputButton from "./InputItems/ClearInputButton";
 import SearchIcon from "./InputItems/SearchIcon";
+import { searchInputLabel } from "./Label";
+
+export const searchInputID = "search-input";
 
 const Container = styled.div`
   display: flex;
@@ -42,8 +45,6 @@ const Input: FunctionComponent = () => {
 
   const ref = useRef<HTMLInputElement | null>(null);
 
-  console.log(searchTerm);
-
   useEffect(() => {
     ref.current?.focus();
   }, [ref]);
@@ -51,14 +52,13 @@ const Input: FunctionComponent = () => {
   return (
     <Container>
       <StyledInput
-        id="search-input"
+        id={searchInputID}
         ref={ref}
         value={searchTerm}
         onChange={(e) => {
           setSearchTerm(e.target.value);
         }}
-        aria-labelledby="search-label"
-        /*  aria-label="Search in videos and headings" */
+        aria-labelledby={searchInputLabel}
         autoComplete="off"
         autoCorrect="off"
         autoCapitalize="off"

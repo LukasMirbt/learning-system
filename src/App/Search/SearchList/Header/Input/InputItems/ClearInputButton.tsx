@@ -1,7 +1,5 @@
 import React, { FunctionComponent, MutableRefObject } from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import IconButton from "@material-ui/core/IconButton";
 import { selector, useSetRecoilState, useRecoilValue } from "recoil";
 import { searchTermState } from "../../../../Search";
@@ -30,13 +28,6 @@ const StyledButton = styled(IconButton)<StyledButtonProps>`
 
   visibility: ${({ sc: { shouldShowClearInputButton } }) =>
     shouldShowClearInputButton === true ? "visible" : "hidden"};
-`;
-
-const ClearSearchIcon = styled(FontAwesomeIcon)`
-  && {
-    width: 20px;
-    height: 20px;
-  }
 `;
 
 const StyledClearIcon = styled(ClearIcon)`

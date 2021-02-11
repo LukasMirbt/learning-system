@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Searchable } from "../../../Media/Media";
@@ -31,22 +31,8 @@ interface TextProps {
 type SubtitleProps = TypographyProps<"span", { component: "span" }>;
 
 const Text = styled.span<TextProps>`
-  ${({ sc: { isCue } }) =>
-    isCue === true
-      ? css`
-          font-weight: normal;
-          font-size: 1rem;
-        `
-      : css`
-          /*         font-weight: bold;
-          font-size: 1.125rem; */
-          font-weight: normal;
-          font-size: 1rem;
-        `};
-`;
-
-const VideoTitle = styled(Typography)<SubtitleProps>`
-  margin-top: 0.25rem;
+  font-weight: normal;
+  font-size: 1rem;
 `;
 
 const Type = styled(Typography)<SubtitleProps>`
@@ -60,10 +46,6 @@ const ListItem: FunctionComponent<{
     <>
       <Column>
         <Text sc={{ isCue }}>{text}</Text>
-
-        {/*         <VideoTitle component="span" variant="subtitle1">
-          {videoTitle}
-        </VideoTitle> */}
 
         <Type component="span" variant="subtitle2">
           {`${videoTitle} - ${isCue === true ? "Video subtitle" : "Section"}`}

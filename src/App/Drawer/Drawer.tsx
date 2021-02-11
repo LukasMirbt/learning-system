@@ -7,8 +7,9 @@ import { useTheme } from "styled-components";
 import TemporaryDrawer from "./TemporaryDrawer";
 
 export const drawerLabelID = "drawerLabel";
+export const drawerContainerID = "drawerContainer";
 
-const Container = styled.div`
+const Container = styled.nav`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -40,7 +41,7 @@ const Title = styled(Typography)`
 `;
 
 export const DrawerComponent = (
-  <Container>
+  <Container id={drawerContainerID} aria-labelledby={drawerLabelID}>
     <Title id={drawerLabelID} variant="h2">
       Video sections
     </Title>

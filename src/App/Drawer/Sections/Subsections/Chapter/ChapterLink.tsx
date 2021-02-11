@@ -5,8 +5,8 @@ import dayjs from "../../../../dayjsFull";
 import { Chapter } from "../../../../Media/Media";
 import { TitleContext } from "../../Sections";
 import useIsActive from "./useIsActive";
-import ListItem from "@material-ui/core/ListItem";
 import { useHistory } from "react-router-dom";
+import ListItem from "@material-ui/core/ListItem";
 
 export const StyledChapterLink = styled(ListItem)`
   display: flex;

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
-import Modal from "./SearchDialog";
+import SearchDialog, { searchDialogID } from "./SearchDialog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { atom, useRecoilState } from "recoil";
@@ -29,6 +29,10 @@ const StyledButton = styled(Button)`
     background-color: rgba(255, 255, 255, 0.08);
   }
 
+  &:focus-visible {
+    background-color: rgba(255, 255, 255, 0.16);
+  }
+
   .MuiButton-label {
     margin-right: 0.5rem;
   }
@@ -42,6 +46,8 @@ const Search: FunctionComponent = () => {
   return isSearchRoute === false ? (
     <Container>
       <StyledButton
+        aria-haspopup
+        aria-controls={searchDialogID}
         onClick={() => {
           setIsSearchOpen(true);
         }}
@@ -52,7 +58,7 @@ const Search: FunctionComponent = () => {
         Search
       </StyledButton>
 
-      {isSearchOpen === true && <Modal />}
+      {isSearchOpen === true && <SearchDialog />}
     </Container>
   ) : null;
 };

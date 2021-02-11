@@ -11,6 +11,7 @@ const ListHeading = styled(Typography)`
   width: 100%;
   max-width: 1217px;
   padding-left: 1rem;
+  margin-bottom: 0.5rem;
 `;
 
 const Bold = styled.span`

@@ -11,7 +11,7 @@ const transcriptMarginLeftREM = 0.5;
 const titleRowREM = 4;
 
 const MUITheme = createMuiTheme({
-  /*   transitions: {
+  /* transitions: {
     create: () => "none",
   }, */
   palette: {
@@ -27,7 +27,7 @@ const MUITheme = createMuiTheme({
       noSsr: true,
     },
     MuiButtonBase: {
-      disableTouchRipple: true,
+      disableRipple: true,
     },
     MuiInputLabel: {
       classes: {

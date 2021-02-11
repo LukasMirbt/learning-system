@@ -4,11 +4,13 @@ import { useRecoilValue } from "recoil";
 import { videoPlayerState } from "../VideoElement/useVideoPlayer/useVideoPlayer";
 import { Searchable } from "../../Media/Media";
 import setVideoTime from "../VideoElement/setVideoTime";
-import Typography, { TypographyProps } from "@material-ui/core/Typography";
+import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
+import Typography from "@material-ui/core/Typography";
+import { videoPlayButtonID } from "../VideoElement/useVideoPlayer/useVideoPlayer";
 
-type StyledCueProps = TypographyProps<"button", { component: "button" }>;
+/* type StyledCueProps = ListItemProps<"a", { component: "a" }>; */
 
-const StyledCue = styled(Typography)<StyledCueProps>`
+const StyledCue = styled(ListItem)`
   text-align: start;
   width: calc(100% - 0.25em);
   padding: 0.25rem 0;
@@ -31,6 +33,8 @@ const StyledCue = styled(Typography)<StyledCueProps>`
   }
 `;
 
+const Text = styled(Typography)``;
+
 const Cue: FunctionComponent<{
   cue: Searchable;
   cueIndex: number;
@@ -39,10 +43,9 @@ const Cue: FunctionComponent<{
 
   return (
     <StyledCue
-      variant="body1"
-      component="button"
+      button
       id={`cue${cueIndex}`}
-      type="button"
+      /*    href={`#${videoPlayButtonID}`} */
       onClick={() => {
         if (videoPlayer !== null) {
           setVideoTime({
@@ -52,8 +55,9 @@ const Cue: FunctionComponent<{
         }
       }}
       key={cue.text}
-      dangerouslySetInnerHTML={{ __html: cue.text }}
-    />
+    >
+      <Text variant="body1" dangerouslySetInnerHTML={{ __html: cue.text }} />
+    </StyledCue>
   );
 };
 

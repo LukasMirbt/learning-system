@@ -27,11 +27,6 @@ const TranscriptContainer = styled.div`
 const CueList: FunctionComponent<{ cues: Searchable[] }> = ({ cues }) => {
   useActiveCueStyle();
 
-  const path = useHistory().location.pathname;
-
-  const splitPath = path.split("/");
-  const videoTitle = splitPath[1].replace(/-+/g, " ");
-
   return (
     <Container aria-labelledby={transcriptLabelID} id="transcriptContainer">
       <TranscriptHeader lastCueID={`cue${cues.length - 1}`} />

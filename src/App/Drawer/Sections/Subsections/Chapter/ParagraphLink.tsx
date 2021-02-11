@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useContext } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import dayjs from "dayjs";
 import { StyledChapterLink } from "./ChapterLink";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";

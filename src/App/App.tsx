@@ -6,6 +6,7 @@ import AppBar from "./AppBar/AppBar";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import Search from "./Search/SearchList/SearchList";
 import PageNotFound from "./PageNotFound";
+import { videoPaths } from "./Video/Video";
 
 const Container = styled.div`
   display: flex;
@@ -32,6 +33,8 @@ const App: FunctionComponent = () => {
     history.replace({ state: null });
   }, [history]);
 
+  console.log("render");
+
   return (
     <>
       <AppBar />
@@ -46,7 +49,7 @@ const App: FunctionComponent = () => {
             <Redirect to="/View-from-a-blue-moon" />
           </Route>
 
-          <Route path="/">
+          <Route path={(videoPaths as unknown) as string[]}>
             <Drawer />
             <Video />
           </Route>

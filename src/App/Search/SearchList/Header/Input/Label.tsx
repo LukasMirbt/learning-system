@@ -1,6 +1,9 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
+import { searchInputID } from "./Input";
+
+export const searchInputLabel = "search-label";
 
 type LabelProps = TypographyProps<"label", { component: "label" }>;
 
@@ -17,8 +20,8 @@ const Form: FunctionComponent = () => {
   return (
     <StyledLabel
       component="label"
-      htmlFor="search-input"
-      id="search-label"
+      htmlFor={searchInputID}
+      id={searchInputLabel}
       variant="h3"
     >
       Search in sections and video subtitles

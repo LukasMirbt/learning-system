@@ -1,4 +1,8 @@
 import { DefaultTheme } from "styled-components";
+import resizeByLimitingDimension from "./resizeByLimitingDimension";
+
+const minWidth = 300;
+const minHeight = 300;
 
 const onResize = (args: {
   theme: DefaultTheme;
@@ -30,35 +34,25 @@ const onResize = (args: {
   const availableWidth = videoContainerWidth - transcriptWidth;
   const availableHeight = videoContainerHeight - titleRowHeight;
 
+  const adjustedWidth = availableWidth > minWidth ? availableWidth : minWidth;
+  const adjustedHeight =
+    availableHeight > minHeight ? availableHeight : minHeight;
+
   const aspectRatio = sourceWidth / sourceHeight;
-  const availableRatio = availableWidth / availableHeight;
+  const availableRatio = adjustedWidth / adjustedHeight;
 
-  const videoPlayerContainer = document.getElementById("plyrContainer")!;
-
-  if (availableRatio > aspectRatio) {
-    const height = `${availableHeight.toFixed(3)}px`;
-    const width = `${(availableHeight * aspectRatio).toFixed(3)}px`;
-
-    videoPlayerContainer.style.height = height;
-    videoPlayerContainer.style.width = width;
-
-    const transcript = document.getElementById("transcriptContainer");
-
-    if (transcript !== null) {
-      transcript.style.height = height;
-    }
+  if (aspectRatio > availableRatio) {
+    resizeByLimitingDimension({
+      limitingDimensionSize: adjustedWidth,
+      aspectRatio,
+      isWidthLimiting: true,
+    });
   } else {
-    const width = `${availableWidth.toFixed(3)}px`;
-    const height = `${(availableWidth / aspectRatio).toFixed(3)}px`;
-
-    videoPlayerContainer.style.width = width;
-    videoPlayerContainer.style.height = height;
-
-    const transcript = document.getElementById("transcriptContainer");
-
-    if (transcript !== null) {
-      transcript.style.height = height;
-    }
+    resizeByLimitingDimension({
+      limitingDimensionSize: adjustedHeight,
+      aspectRatio,
+      isWidthLimiting: false,
+    });
   }
 };
 

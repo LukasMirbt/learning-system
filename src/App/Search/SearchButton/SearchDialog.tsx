@@ -8,6 +8,8 @@ import Autocomplete, {
   searchAutocompleteLabelID,
 } from "./Autocomplete/Autocomplete";
 
+export const searchDialogID = "searchDialog";
+
 const StyledDialog = styled(MUIDialog)`
   .MuiDialog-paper {
     position: absolute;
@@ -44,6 +46,7 @@ const Modal: FunctionComponent = () => {
 
   return (
     <StyledDialog
+      id={searchDialogID}
       PaperProps={{
         "aria-label": "Search",
       }}

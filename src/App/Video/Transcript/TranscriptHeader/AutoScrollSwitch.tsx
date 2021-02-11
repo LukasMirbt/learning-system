@@ -5,6 +5,16 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { useRecoilState } from "recoil";
 import { isAutoScrollEnabledState } from "../useActiveCueStyle";
 
+const StyledSwitch = styled(Switch)`
+  .Mui-focusVisible {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .Mui-checked.Mui-focusVisible {
+    background-color: rgba(0, 0, 0, 0.16);
+  }
+`;
+
 const AutoScrollSwitch: FunctionComponent = () => {
   const [isAutoScrollEnabled, setIsAutoScrollEnabled] = useRecoilState(
     isAutoScrollEnabledState
@@ -13,7 +23,7 @@ const AutoScrollSwitch: FunctionComponent = () => {
   return (
     <FormControlLabel
       control={
-        <Switch
+        <StyledSwitch
           checked={isAutoScrollEnabled}
           onChange={() => {
             setIsAutoScrollEnabled((prevEnabled) => !prevEnabled);

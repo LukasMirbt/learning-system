@@ -7,9 +7,18 @@ import { useTheme } from "styled-components";
 import { useSetRecoilState } from "recoil";
 import { isDrawerOpenState } from "../Drawer/TemporaryDrawer";
 import { useRouteMatch } from "react-router-dom";
+import { drawerContainerID } from "../Drawer/Drawer";
 
 const StyledIconButton = styled(IconButton)`
   margin-right: 0.5rem;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  &:focus-visible {
+    background-color: rgba(255, 255, 255, 0.16);
+  }
 `;
 
 const DrawerButton: FunctionComponent = () => {
@@ -20,22 +29,21 @@ const DrawerButton: FunctionComponent = () => {
 
   const isSearchRoute = useRouteMatch("/search") !== null;
 
-  return (
-    <>
-      {isXLScreen === false && isSearchRoute === false && (
-        <StyledIconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={() => {
-            setIsDrawerOpen((prevIsOpen) => !prevIsOpen);
-          }}
-          edge="start"
-        >
-          <MenuIcon />
-        </StyledIconButton>
-      )}
-    </>
-  );
+  return isXLScreen === false && isSearchRoute === false ? (
+    <StyledIconButton
+      disableFocusRipple
+      color="inherit"
+      aria-label="Open navigation"
+      aria-haspopup
+      aria-controls={drawerContainerID}
+      onClick={() => {
+        setIsDrawerOpen((prevIsOpen) => !prevIsOpen);
+      }}
+      edge="start"
+    >
+      <MenuIcon />
+    </StyledIconButton>
+  ) : null;
 };
 
 export default DrawerButton;

@@ -6,6 +6,8 @@ import { videoElementID } from "../VideoElement";
 import { isTranscriptShowingState } from "../../Transcript/Transcript";
 import getOptions from "./getOptions";
 
+export const videoPlayButtonID = "videoPlayButton";
+
 export const videoPlayerState = atom<VideoPlayer | null>({
   key: "videoPlayer",
   default: null,
@@ -46,6 +48,7 @@ const useVideoPlayer = (args: {
     videoPlayer.elements.container.id = "plyrContainer";
     videoPlayer.elements.container.tabIndex = -1;
     videoPlayer.elements.inputs.volume.step = "0.02";
+    (videoPlayer.elements as any).controls.children[0].id = "videoPlayButton";
 
     videoPlayer.canPlay = false;
 

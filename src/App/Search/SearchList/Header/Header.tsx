@@ -1,10 +1,6 @@
-import React, { FunctionComponent, useEffect, useMemo } from "react";
-import ReactDOM from "react-dom";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
-import NumberOfResults from "./NumberOfResults";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
-import { useRecoilValue } from "recoil";
-import { searchTermState } from "../../Search";
 import Input from "./Input/Input";
 
 export const headerHeight = 108;
@@ -25,10 +21,9 @@ const FormContainer = styled.div`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
-  /*   justify-content: center; */
+
   width: 100%;
   max-width: 1200px;
-
   padding: 0 1rem;
 `;
 
@@ -52,7 +47,6 @@ const Header: FunctionComponent = () => {
           Search in sections and video subtitles
         </Label>
         <Input />
-        {/*      <NumberOfResults /> */}
       </Column>
     </FormContainer>
   );
