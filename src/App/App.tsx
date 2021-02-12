@@ -33,8 +33,6 @@ const App: FunctionComponent = () => {
     history.replace({ state: null });
   }, [history]);
 
-  console.log("render");
-
   return (
     <>
       <AppBar />

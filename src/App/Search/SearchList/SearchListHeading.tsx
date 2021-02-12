@@ -10,7 +10,9 @@ const ListHeading = styled(Typography)`
   font-size: 3rem;
   width: 100%;
   max-width: 1217px;
-  padding-left: 1rem;
+  padding: 0 1rem;
+
+  margin-top: 1rem;
   margin-bottom: 0.5rem;
 `;
 
@@ -25,7 +27,7 @@ const SearchListHeading: FunctionComponent = () => {
   return (
     <ListHeading id={searchListHeadingLabel} variant="h1">
       {`Found ${searchResults.length} search results for `}
-      <Bold>{searchTerm}</Bold>
+      <Bold>{`"${searchTerm}"`}</Bold>
     </ListHeading>
   );
 };

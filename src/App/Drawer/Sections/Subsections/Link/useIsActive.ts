@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { videoPlayerState } from "../../../../Video/VideoElement/useVideoPlayer/useVideoPlayer";

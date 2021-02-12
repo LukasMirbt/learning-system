@@ -10,6 +10,12 @@ const StyledSwitch = styled(Switch)`
     background-color: rgba(0, 0, 0, 0.08);
   }
 
+  .Mui-checked {
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.08);
+    }
+  }
+
   .Mui-checked.Mui-focusVisible {
     background-color: rgba(0, 0, 0, 0.16);
   }

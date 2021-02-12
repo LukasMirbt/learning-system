@@ -1,19 +1,14 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
-import { searchInputID } from "./Input";
+import { searchInputID } from "./InputElement";
 
-export const searchInputLabel = "search-label";
+export const searchInputLabel = "searchLabel";
 
 type LabelProps = TypographyProps<"label", { component: "label" }>;
 
 const StyledLabel = styled(Typography)<LabelProps>`
-  font-size: 1.375rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  font-size: 1.25rem;
 `;
 
 const Form: FunctionComponent = () => {

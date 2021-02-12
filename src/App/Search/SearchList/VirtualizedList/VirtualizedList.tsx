@@ -1,17 +1,19 @@
 import React, { CSSProperties, FunctionComponent } from "react";
-import { FixedSizeList as List } from "react-window";
+import { VariableSizeList as List } from "react-window";
 import { useRecoilValue } from "recoil";
 import { searchResultsState } from "../../Search";
 import Autosizer from "react-virtualized-auto-sizer";
 import { Searchable } from "../../../Media/Media";
 import Fuse from "fuse.js";
-import ItemRenderer from "./ItemRenderer";
+import Row from "./Row/Row";
 
 const itemSize = 80;
 
 const listStyle: CSSProperties = {
   overflowY: "scroll",
 };
+
+const getItemSize = (index: number) => (index === 0 ? itemSize + 1 : itemSize);
 
 const getItemKey = (index: number, data: Fuse.FuseResult<Searchable>[]) =>
   data[index].refIndex;
@@ -28,10 +30,10 @@ const VirtualizedList: FunctionComponent = () => {
           itemKey={getItemKey}
           height={height}
           width={width}
-          itemSize={itemSize}
+          itemSize={getItemSize}
           itemCount={searchResults.length}
         >
-          {ItemRenderer}
+          {Row}
         </List>
       )}
     </Autosizer>

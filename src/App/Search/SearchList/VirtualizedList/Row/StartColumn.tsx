@@ -8,14 +8,13 @@ interface TextProps {
 }
 
 const Text = styled.div<TextProps>`
+  margin-bottom: 0.25rem;
   ${({ sc: { isCue } }) =>
     isCue === true
       ? css`
-          font-weight: 400;
           font-size: 1.25rem;
         `
       : css`
-          font-weight: 500;
           font-size: 1.5rem;
         `};
 `;

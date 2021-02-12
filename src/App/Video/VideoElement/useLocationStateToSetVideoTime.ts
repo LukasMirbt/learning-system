@@ -10,14 +10,19 @@ import setVideoTime from "./setVideoTime";
 const useLocationStateToSetVideoTime = () => {
   const videoPlayer = useRecoilValue(videoPlayerState);
 
-  const location = useLocation<{ time: number } | null | undefined>();
+  const location = useLocation<
+    { time: number; focusPlayButton?: true } | null | undefined
+  >();
 
   useEffect(() => {
     const asyncEffect = async () => {
       if (location.state && videoPlayer !== null) {
         const { time } = location.state;
         setVideoTime({ videoPlayer, time });
-        document.getElementById(videoPlayButtonID)?.focus();
+
+        if (location.state.focusPlayButton !== undefined) {
+          document.getElementById(videoPlayButtonID)?.focus();
+        }
       }
     };
 

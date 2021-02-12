@@ -1,6 +1,6 @@
 import React, { FunctionComponent, Fragment } from "react";
 import ParagraphLink from "./ParagraphLink";
-import { Chapter } from "../../../../Media/Media";
+import { Chapter } from "../../../../../Media/Media";
 
 const Paragraphs: FunctionComponent<{
   paragraphs: Chapter["paragraphs"];

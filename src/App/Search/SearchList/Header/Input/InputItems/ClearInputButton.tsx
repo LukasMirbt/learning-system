@@ -51,7 +51,7 @@ const ClearInputButton: FunctionComponent<{
         inputRef.current?.focus();
       }}
       type="reset"
-      aria-label="Clear search query"
+      aria-hidden
     >
       <StyledClearIcon />
     </StyledButton>

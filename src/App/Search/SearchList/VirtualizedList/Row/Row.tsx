@@ -1,15 +1,18 @@
-import React, { FunctionComponent, CSSProperties } from "react";
+import React, { CSSProperties, FunctionComponent } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Searchable } from "../../../../Media/Media";
+import Fuse from "fuse.js";
 import StartColumn from "./StartColumn";
 import EndColumn from "./EndColumn";
-import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
-import { NavLink } from "react-router-dom";
 
-type ContainerProps = ListItemProps<"a", { component: "a" }>;
+interface ContainerProps {
+  sc: {
+    isFirst: boolean;
+  };
+}
 
-const Container = styled(NavLink)`
+const Container = styled(Link)<ContainerProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,6 +20,9 @@ const Container = styled(NavLink)`
   font-size: 1.5rem;
   max-width: 1200px;
   border-bottom: ${({ theme }) => `1px solid ${theme.palette.divider}`};
+
+  border-top: ${({ theme, sc: { isFirst } }) =>
+    isFirst === true ? `1px solid ${theme.palette.divider}` : null};
 
   padding: 0 1rem;
 
@@ -31,21 +37,20 @@ const Container = styled(NavLink)`
   }
 `;
 
-const Row: FunctionComponent<{
+const ItemRenderer: FunctionComponent<{
   index: number;
   style: CSSProperties;
-  item: Searchable;
-}> = ({
-  index,
-  style,
-  item: { text, startTime, endTime, videoTitle, isCue },
-}) => {
+  data: Fuse.FuseResult<Searchable>[];
+}> = ({ index, style, data }) => {
+  const { text, startTime, endTime, videoTitle, isCue } = data[index].item;
   return (
     <Container
+      sc={{ isFirst: index === 0 }}
       to={{
         pathname: `/${videoTitle.replace(/\s+/g, "-")}`,
         state: {
           time: startTime,
+          focusPlayButton: true,
         },
       }}
       style={{
@@ -67,4 +72,4 @@ const Row: FunctionComponent<{
   );
 };
 
-export default Row;
+export default ItemRenderer;

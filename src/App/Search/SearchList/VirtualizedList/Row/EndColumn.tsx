@@ -5,6 +5,7 @@ import dayjs from "../../../../dayjsFull";
 const Time = styled.span`
   display: flex;
   font-size: 1rem;
+  margin-bottom: 0.25rem;
 `;
 
 const VideoTitle = styled.span`

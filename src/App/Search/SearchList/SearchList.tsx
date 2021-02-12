@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useEffect } from "react";
-import { useRecoilValue, useResetRecoilState } from "recoil";
+import { useResetRecoilState } from "recoil";
 import styled from "styled-components";
-import { searchResultsState, searchTermState } from "../Search";
+import { searchTermState } from "../Search";
 import VirtualizedList from "./VirtualizedList/VirtualizedList";
 import Header from "./Header/Header";
-import Typography from "@material-ui/core/Typography";
 import { searchListHeadingLabel } from "./SearchListHeading";
 import SearchListHeading from "./SearchListHeading";
+import Divider from "./VirtualizedList/Row/Divider";
 
 const Container = styled.div`
   width: 100%;
@@ -16,6 +16,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  overflow: hidden;
 `;
 
 const ListContainer = styled.div`
@@ -43,9 +45,10 @@ const SearchList: FunctionComponent = () => {
 
   return (
     <Container>
+      <SearchListHeading />
       <Header />
       <StyledSection aria-labelledby={searchListHeadingLabel}>
-        <SearchListHeading />
+        {/*      <Divider /> */}
         <ListContainer>
           <VirtualizedList />
         </ListContainer>
