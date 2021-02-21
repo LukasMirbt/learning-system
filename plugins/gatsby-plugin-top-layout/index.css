@@ -1,0 +1,53 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+#___gatsby {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+}
+
+#gatsby-focus-wrapper {
+  display: contents;
+}
+
+button {
+  border: unset;
+  background-color: unset;
+  font-size: unset;
+  cursor: pointer;
+}
+
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: Roboto, sans-serif; /* system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
