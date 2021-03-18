@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Chapter from "./Chapter/Chapter";
 import Accordion from "../../../Accordion/Accordion";
 import { Section } from "../../../Media/Media";
@@ -10,7 +10,7 @@ const Container = styled.div`
   padding-left: 1rem;
 `;
 
-const headerCSS = css`
+const headerCSS = `
   margin-left: 1rem;
   width: auto;
 `;

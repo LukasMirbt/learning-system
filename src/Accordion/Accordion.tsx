@@ -7,8 +7,8 @@ const Accordion: FunctionComponent<{
   title: string;
   ID: string;
   children: ReactNode;
-  headerCSS?: FlattenSimpleInterpolation;
-  titleCSS?: FlattenSimpleInterpolation;
+  headerCSS?: string | FlattenSimpleInterpolation;
+  titleCSS?: string | FlattenSimpleInterpolation;
   className?: string;
   isExpandedInitially?: boolean;
 }> = ({

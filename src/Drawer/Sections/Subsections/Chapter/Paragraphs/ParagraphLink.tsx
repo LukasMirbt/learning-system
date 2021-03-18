@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useContext } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Typography, { TypographyProps } from "@material-ui/core/Typography";
 import { TitleContext } from "../../../Sections";
 import Link from "../../Link/Link";
@@ -13,12 +13,12 @@ const Name = styled(Typography)<NameProps>`
   display: flex;
 `;
 
-const linkCSS = css`
+const linkCSS = `
   border-left: 4px solid transparent;
   margin-left: 2rem;
 `;
 
-const isActiveCSS = css`
+const isActiveCSS = `
   font-weight: 700;
 `;
 

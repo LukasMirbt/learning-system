@@ -11,8 +11,8 @@ import { navigate } from "gatsby";
 type StyledChapterLinkProps = {
   sc: {
     isActive: boolean;
-    isActiveCSS?: FlattenSimpleInterpolation;
-    linkCSS?: FlattenSimpleInterpolation;
+    isActiveCSS?: string | FlattenSimpleInterpolation;
+    linkCSS?: string | FlattenSimpleInterpolation;
   };
 };
 
@@ -43,8 +43,8 @@ const Link: FunctionComponent<{
   startTime: number;
   endTime: number;
   children: ReactNode;
-  linkCSS?: FlattenSimpleInterpolation;
-  isActiveCSS?: FlattenSimpleInterpolation;
+  linkCSS?: string | FlattenSimpleInterpolation;
+  isActiveCSS?: string | FlattenSimpleInterpolation;
   isActiveElement?: ReactNode;
 }> = ({
   pathname,

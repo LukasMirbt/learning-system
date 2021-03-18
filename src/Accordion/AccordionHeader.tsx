@@ -5,7 +5,7 @@ import Chevron from "./Chevron";
 import ListItem from "@material-ui/core/ListItem";
 
 type TitleProps = TypographyProps<"span", { component: "span" }> & {
-  sc: { titleCSS: FlattenSimpleInterpolation | undefined };
+  sc: { titleCSS: string | FlattenSimpleInterpolation };
 };
 
 const Title = styled(Typography)<TitleProps>`
@@ -13,12 +13,12 @@ const Title = styled(Typography)<TitleProps>`
   font-weight: inherit;
   font-size: 1rem;
 
-  ${({ sc: { titleCSS } }) => titleCSS ?? null}
+  ${({ sc: { titleCSS } }) => titleCSS}
 `;
 
 interface ContainerProps {
   sc: {
-    headerCSS: FlattenSimpleInterpolation | undefined;
+    headerCSS: string | FlattenSimpleInterpolation;
   };
 }
 
@@ -32,7 +32,7 @@ const Container = styled(ListItem)<ContainerProps>`
 
   padding: 0.25rem 1rem;
 
-  ${({ sc: { headerCSS } }) => headerCSS ?? null}
+  ${({ sc: { headerCSS } }) => headerCSS};
 `;
 
 const AccordionHeader: FunctionComponent<{
@@ -40,8 +40,8 @@ const AccordionHeader: FunctionComponent<{
   ID: string;
   isExpanded: boolean;
   setIsExpanded: Dispatch<SetStateAction<boolean>>;
-  titleCSS?: FlattenSimpleInterpolation;
-  headerCSS?: FlattenSimpleInterpolation;
+  titleCSS?: string | FlattenSimpleInterpolation;
+  headerCSS?: string | FlattenSimpleInterpolation;
 }> = ({ title, ID, isExpanded, setIsExpanded, headerCSS, titleCSS }) => {
   return (
     <Container

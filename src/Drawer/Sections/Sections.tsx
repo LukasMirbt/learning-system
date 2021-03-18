@@ -1,5 +1,4 @@
 import React, { createContext, FunctionComponent, Fragment } from "react";
-import { css } from "styled-components";
 import { useRecoilValue, atom } from "recoil";
 import Accordion from "../../Accordion/Accordion";
 import Subsections from "./Subsections/Subsections";
@@ -32,7 +31,7 @@ export const videoStructuresState = atom<VideoStructure[]>({
   default: [viewFromABlueMoonStructure, elephantsDreamStructure],
 });
 
-const titleCSS = css`
+const titleCSS = `
   font-weight: 700;
 `;
 
