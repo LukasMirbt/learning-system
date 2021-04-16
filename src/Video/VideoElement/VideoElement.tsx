@@ -1,8 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import styled from "styled-components";
-import viewFromABlueMoonVideoSource from "../../Media/View-from-a-blue-moon/video.mp4";
 import viewFromABlueMoonCaptionsSource from "file-loader!../../Media/View-from-a-blue-moon/captions.vtt";
-import elephantsDreamVideoSource from "../../Media/Elephants-dream/video.mp4";
 import elephantsDreamCaptionsSource from "file-loader!../../Media/Elephants-dream/captions.vtt";
 import VideoSetup from "./VideoSetup";
 
@@ -12,14 +10,14 @@ export const videoElementID = "videoElement-videoElement";
 const sources = {
   "/View-from-a-blue-moon": {
     title: "View from a blue moon",
-    videoSource: viewFromABlueMoonVideoSource,
+    videoSource: process.env.VIEW_FROM_A_BLUE_MOON_URL,
     captionsSource: viewFromABlueMoonCaptionsSource,
     sourceWidth: 860,
     sourceHeight: 480,
   },
   "/Elephants-dream": {
     title: "Elephants dream",
-    videoSource: elephantsDreamVideoSource,
+    videoSource: process.env.ELEPHANTS_DREAM_URL,
     captionsSource: elephantsDreamCaptionsSource,
     sourceWidth: 1920,
     sourceHeight: 1080,

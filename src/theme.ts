@@ -13,9 +13,6 @@ const drawerWidth = 241;
 const titleRowREM = 4;
 
 let MUITheme = createMuiTheme({
-  /* transitions: {
-    create: () => "none",
-  }, */
   palette: {
     primary: {
       main: primary,
@@ -25,9 +22,6 @@ let MUITheme = createMuiTheme({
     },
   },
   props: {
-    /*     MuiUseMediaQuery: {
-      noSsr: true,
-    }, */
     MuiButtonBase: {
       disableRipple: true,
     },
