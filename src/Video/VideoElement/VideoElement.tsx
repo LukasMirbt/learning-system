@@ -3,24 +3,28 @@ import styled from "styled-components";
 import viewFromABlueMoonCaptionsSource from "file-loader!../../Media/View-from-a-blue-moon/captions.vtt";
 import elephantsDreamCaptionsSource from "file-loader!../../Media/Elephants-dream/captions.vtt";
 import VideoSetup from "./VideoSetup";
+import viewFromABlueMoonPosterSource from "../../Media/View-from-a-blue-moon/poster.png";
+import elephantsDreamPosterSource from "../../Media/Elephants-dream/poster.png";
 
 export const trackElementID = "videoElement-track";
 export const videoElementID = "videoElement-videoElement";
 
 const sources = {
-  "/View-from-a-blue-moon": {
-    title: "View from a blue moon",
-    videoSource: process.env.VIEW_FROM_A_BLUE_MOON_URL,
-    captionsSource: viewFromABlueMoonCaptionsSource,
-    sourceWidth: 860,
-    sourceHeight: 480,
-  },
   "/Elephants-dream": {
     title: "Elephants dream",
     videoSource: process.env.ELEPHANTS_DREAM_URL,
     captionsSource: elephantsDreamCaptionsSource,
+    posterSource: elephantsDreamPosterSource,
     sourceWidth: 1920,
     sourceHeight: 1080,
+  },
+  "/View-from-a-blue-moon": {
+    title: "View from a blue moon",
+    videoSource: process.env.VIEW_FROM_A_BLUE_MOON_URL,
+    captionsSource: viewFromABlueMoonCaptionsSource,
+    posterSource: viewFromABlueMoonPosterSource,
+    sourceWidth: 860,
+    sourceHeight: 480,
   },
 };
 
@@ -43,6 +47,7 @@ const VideoElement: FunctionComponent<{ path: string }> = ({ path }) => {
     title,
     captionsSource,
     videoSource,
+    posterSource,
     sourceWidth,
     sourceHeight,
   } = sources[path as keyof typeof sources];
@@ -50,6 +55,7 @@ const VideoElement: FunctionComponent<{ path: string }> = ({ path }) => {
   return (
     <Container>
       <video
+        data-poster={posterSource}
         title={title}
         id={videoElementID}
         controls

@@ -16,14 +16,16 @@ export const searchTermState = atom({
   default: "",
 });
 
-export const searchableItems = (viewFromABlueMoonSections as Searchable[]).concat(
-  elephantsDreamSections,
-  viewFromABlueMoonCues,
-  elephantsDreamCues
-);
+export const searchableItems = (viewFromABlueMoonSections as Searchable[])
+  .concat(elephantsDreamSections, viewFromABlueMoonCues, elephantsDreamCues)
+  //this replace statement removes WebVTT cue tags, this is necessary since they interfere with search results otherwise
+  .map((searchable) => ({
+    ...searchable,
+    textWithoutTags: searchable.text.replace(/<\/?[^>]+(>|$)/g, ""),
+  }));
 
 const searchOptions = {
-  keys: ["text"],
+  keys: ["textWithoutTags"],
 };
 
 export const fuseState = atom({

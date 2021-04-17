@@ -5,8 +5,8 @@ import Transcript from "./Transcript/Transcript";
 import VideoTitle, { videoLabelID } from "./VideoTitle/VideoTitle";
 
 export const videoPaths = [
-  "/View-from-a-blue-moon",
   "/Elephants-dream",
+  "/View-from-a-blue-moon",
 ] as const;
 
 const Container = styled.main`

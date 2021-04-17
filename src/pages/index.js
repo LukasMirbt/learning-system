@@ -1,8 +1,13 @@
 import React from "react";
-import Video from "../Video/Video";
+import Video, { videoPaths } from "../Video/Video";
+import videoStructure from "../Media/View-from-a-blue-moon/videoStructure";
+import getSearchableSections from "../Media/getSearchableSections";
 
 const Index = () => {
-  return <Video path="/View-from-a-blue-moon" />;
+  console.log(
+    getSearchableSections(videoStructure.sections, "View from a blue moon")
+  );
+  return <Video path={videoPaths[0]} />;
 };
 
 export default Index;

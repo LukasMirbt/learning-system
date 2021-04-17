@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import styled from "styled-components";
 import AppBar from "../../src/AppBar/AppBar";
 import Drawer from "../../src/Drawer/Drawer";

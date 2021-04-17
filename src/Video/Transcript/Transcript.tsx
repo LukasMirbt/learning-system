@@ -7,11 +7,11 @@ import CueList from "./CueList";
 import { atom, useRecoilValue } from "recoil";
 
 const sources = {
-  "/View-from-a-blue-moon": {
-    cues: viewFromABlueMoonCues,
-  },
   "/Elephants-dream": {
     cues: elephantsDreamCues,
+  },
+  "/View-from-a-blue-moon": {
+    cues: viewFromABlueMoonCues,
   },
 };
 

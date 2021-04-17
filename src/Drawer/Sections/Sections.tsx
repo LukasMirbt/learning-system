@@ -28,7 +28,7 @@ export interface Concept {
 
 export const videoStructuresState = atom<VideoStructure[]>({
   key: "videoStructures",
-  default: [viewFromABlueMoonStructure, elephantsDreamStructure],
+  default: [elephantsDreamStructure, viewFromABlueMoonStructure],
 });
 
 const titleCSS = `

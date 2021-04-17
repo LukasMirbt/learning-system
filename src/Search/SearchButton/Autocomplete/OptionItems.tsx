@@ -39,7 +39,7 @@ const Type = styled(Typography)<SubtitleProps>`
   margin-top: 0.25rem;
 `;
 
-const ListItem: FunctionComponent<{
+const OptionItems: FunctionComponent<{
   item: Searchable;
 }> = ({ item: { text, videoTitle, isCue } }) => {
   return (
@@ -57,4 +57,4 @@ const ListItem: FunctionComponent<{
   );
 };
 
-export default ListItem;
+export default OptionItems;

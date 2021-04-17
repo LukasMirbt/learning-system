@@ -32,6 +32,8 @@ const StyledCue = styled(ListItem)`
 
 const Text = styled(Typography)``;
 
+/* dangerouslySetInnerHTML is used here to preserve potential formatting of WebVTT cue spans,
+ for example <b>, which makes the cue text bold. */
 const Cue: FunctionComponent<{
   cue: Searchable;
   cueIndex: number;

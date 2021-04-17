@@ -14,7 +14,7 @@ const StyledDialog = styled(MUIDialog)`
     top: 0;
     margin: 0;
 
-    margin-top: 60px;
+    margin-top: 120px;
     width: 528px;
     padding: 0 1rem;
 
