@@ -12,7 +12,8 @@ export const videoElementID = "videoElement-videoElement";
 const sources = {
   "/Elephants-dream": {
     title: "Elephants dream",
-    videoSource: process.env.ELEPHANTS_DREAM_URL,
+    videoSource:
+      "https://learning-system-1.s3.eu-north-1.amazonaws.com/Elephants-dream.mp4",
     captionsSource: elephantsDreamCaptionsSource,
     posterSource: elephantsDreamPosterSource,
     sourceWidth: 1920,
@@ -20,7 +21,8 @@ const sources = {
   },
   "/View-from-a-blue-moon": {
     title: "View from a blue moon",
-    videoSource: process.env.VIEW_FROM_A_BLUE_MOON_URL,
+    videoSource:
+      "https://learning-system-1.s3.eu-north-1.amazonaws.com/View-from-a-blue-moon.mp4",
     captionsSource: viewFromABlueMoonCaptionsSource,
     posterSource: viewFromABlueMoonPosterSource,
     sourceWidth: 860,
@@ -62,12 +64,7 @@ const VideoElement: FunctionComponent<{ path: string }> = ({ path }) => {
         crossOrigin="anonymous"
         playsInline
       >
-        <source
-          src={
-            "https://learning-system-1.s3.eu-north-1.amazonaws.com/Elephants-dream.mp4"
-          }
-          type="video/mp4"
-        />
+        <source src={videoSource} type="video/mp4" />
 
         <track
           id={trackElementID}

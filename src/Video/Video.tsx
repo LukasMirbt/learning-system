@@ -37,9 +37,9 @@ const Video: FunctionComponent<{ path: string }> = ({ path }) => {
   return (
     <Container aria-labelledby={videoLabelID} id="videoContainer">
       <Row>
+        <VideoTitle path={path} />
         <VideoElement path={path} />
         <Transcript path={path} />
-        <VideoTitle path={path} />
       </Row>
     </Container>
   );
