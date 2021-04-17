@@ -62,7 +62,12 @@ const VideoElement: FunctionComponent<{ path: string }> = ({ path }) => {
         crossOrigin="anonymous"
         playsInline
       >
-        <source src={videoSource} type="video/mp4" />
+        <source
+          src={
+            "https://learning-system-1.s3.eu-north-1.amazonaws.com/Elephants-dream.mp4"
+          }
+          type="video/mp4"
+        />
 
         <track
           id={trackElementID}
