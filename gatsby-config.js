@@ -27,7 +27,4 @@ module.exports = {
       },
     },
   ],
-  siteMetadata: {
-    title: "Leaning system",
-  },
 };

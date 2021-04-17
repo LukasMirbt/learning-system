@@ -6,6 +6,7 @@ import { RecoilRoot } from "recoil";
 import { ThemeProvider as SCThemeProvider } from "styled-components";
 
 const Providers = (props) => {
+  console.log(props);
   return (
     <React.Fragment>
       <Helmet>
@@ -17,10 +18,10 @@ const Providers = (props) => {
         />
         <meta
           name="description"
-          content="Video lectures and course material for insert course title"
+          content="Accessible video content for online courses"
         />
 
-        <title>Insert course title</title>
+        <title>Learning system</title>
       </Helmet>
       <ThemeProvider theme={theme}>
         <SCThemeProvider theme={theme}>
