@@ -14,7 +14,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   display: none;
 
   ${({ sc: { theme } }) => css`
-    @media screen and (min-width: ${`${theme.breakpoints.values.lg}px`}) {
+    @media screen and (min-width: ${`${theme.breakpoints.values.md}px`}) {
       display: block;
     }
   `}

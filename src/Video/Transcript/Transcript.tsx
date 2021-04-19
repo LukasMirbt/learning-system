@@ -22,7 +22,7 @@ export const isTranscriptShowingState = atom({
 
 const Transcript: FunctionComponent<{ path: string }> = ({ path }) => {
   const theme = useTheme();
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
   const isTranscriptShowing = useRecoilValue(isTranscriptShowingState);
 
   return isLargeScreen === true && isTranscriptShowing === true ? (
