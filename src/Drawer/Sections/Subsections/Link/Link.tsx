@@ -4,7 +4,7 @@ import ListItem from "@material-ui/core/ListItem";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { isDrawerOpenState } from "../../../TemporaryDrawer";
 import Time from "./Time";
-import useIsActive from "./useIsActive";
+import useIsActive, { isPathnameActive } from "./useIsActive";
 import { videoState } from "../../../../Video/VideoElement/useVideoState/useVideoState";
 import { navigate } from "gatsby";
 
@@ -66,8 +66,8 @@ const Link: FunctionComponent<{
       button
       sc={{ isActive, isActiveCSS, linkCSS }}
       onClick={() => {
-        setVideoState((prevState) => {
-          if (prevState.videoPathname !== pathname) {
+        setVideoState(({ videoPathname }) => {
+          if (isPathnameActive({ pathname, videoPathname }) === false) {
             navigate(pathname);
           }
           return {

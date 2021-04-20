@@ -4,9 +4,10 @@ import {
   videoPlayerState,
 } from "../useVideoPlayer/useVideoPlayer";
 import { videoPaths } from "../../Video";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import setVideoTime from "./setVideoTime";
 import { atom } from "recoil";
+import { useLocation } from "@reach/router";
 
 export const videoState = atom<{
   time: number | null;
@@ -15,7 +16,7 @@ export const videoState = atom<{
   key: "videoState",
   default: {
     time: null,
-    videoPathname: videoPaths[0],
+    videoPathname: "/Elephants-dream",
   },
 });
 
@@ -28,10 +29,22 @@ export const shouldFocusPlayButtonRefState = atom({
 const useVideoState = () => {
   const videoPlayer = useRecoilValue(videoPlayerState);
 
-  const state = useRecoilValue(videoState);
+  const [state, setState] = useRecoilState(videoState);
+
   const shouldFocusPlayButtonRef = useRecoilValue(
     shouldFocusPlayButtonRefState
   );
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname !== "/" && state.videoPathname !== pathname) {
+      setState((prev) => ({
+        ...prev,
+        videoPathname: pathname,
+      }));
+    }
+  }, []);
 
   useEffect(() => {
     const asyncEffect = async () => {

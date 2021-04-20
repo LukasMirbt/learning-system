@@ -3,6 +3,24 @@ import { useRecoilValue } from "recoil";
 import { videoPlayerState } from "../../../../Video/VideoElement/useVideoPlayer/useVideoPlayer";
 import { videoState } from "../../../../Video/VideoElement/useVideoState/useVideoState";
 
+export const isPathnameActive = (args: {
+  pathname: string;
+  videoPathname: string;
+}) => {
+  const { pathname, videoPathname } = args;
+  const pathnameWithoutSlashes = pathname.replace(/\//g, "");
+
+  if (
+    (pathnameWithoutSlashes !== "" &&
+      videoPathname.includes(pathnameWithoutSlashes)) ||
+    (pathname === "/" && videoPathname.includes("Elephants-dream"))
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const useIsActive = (args: {
   startTime: number;
   endTime: number;
@@ -15,7 +33,10 @@ const useIsActive = (args: {
   const { videoPathname } = useRecoilValue(videoState);
 
   const [isActive, setIsActive] = useState(() => {
-    if (videoPlayer !== null && pathname.includes(videoPathname)) {
+    if (
+      videoPlayer !== null &&
+      isPathnameActive({ pathname, videoPathname }) === true
+    ) {
       const { currentTime } = videoPlayer;
       return currentTime >= startTime && currentTime <= endTime;
     } else {
@@ -29,7 +50,7 @@ const useIsActive = (args: {
         const { currentTime } = videoPlayer;
 
         if (
-          pathname.includes(videoPathname) &&
+          isPathnameActive({ pathname, videoPathname }) === true &&
           currentTime >= startTime &&
           currentTime <= endTime
         ) {

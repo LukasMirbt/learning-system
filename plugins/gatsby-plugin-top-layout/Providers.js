@@ -6,7 +6,6 @@ import { RecoilRoot } from "recoil";
 import { ThemeProvider as SCThemeProvider } from "styled-components";
 
 const Providers = (props) => {
-  console.log(props);
   return (
     <React.Fragment>
       <Helmet>

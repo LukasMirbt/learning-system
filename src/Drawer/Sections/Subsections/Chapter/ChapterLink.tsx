@@ -24,7 +24,6 @@ const Border = styled.span`
 
 const isActiveElement = <Border />;
 
-
 const ChapterLink: FunctionComponent<{
   chapter: Chapter;
 }> = ({ chapter: { chapterName, startTime, endTime } }) => {
@@ -39,7 +38,6 @@ const ChapterLink: FunctionComponent<{
       endTime={endTime}
       isActiveElement={isActiveElement}
     >
-      
       <Subheading variant="h3" component="span">
         {chapterName}
       </Subheading>
