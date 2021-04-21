@@ -45,19 +45,11 @@ const onResize = (args: {
   const aspectRatio = sourceWidth / sourceHeight;
   const availableRatio = adjustedWidth / adjustedHeight;
 
-  if (aspectRatio > availableRatio) {
-    resizeByLimitingDimension({
-      limitingDimensionSize: adjustedWidth,
-      aspectRatio,
-      isWidthLimiting: true,
-    });
-  } else {
-    resizeByLimitingDimension({
-      limitingDimensionSize: adjustedHeight,
-      aspectRatio,
-      isWidthLimiting: false,
-    });
-  }
+  resizeByLimitingDimension({
+    limitingDimensionSize: adjustedWidth,
+    isWidthLimiting: aspectRatio > availableRatio,
+    aspectRatio,
+  });
 };
 
 export default onResize;

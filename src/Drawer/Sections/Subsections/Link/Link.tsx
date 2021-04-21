@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactNode } from "react";
 import styled, { FlattenSimpleInterpolation } from "styled-components";
 import ListItem from "@material-ui/core/ListItem";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { isDrawerOpenState } from "../../../TemporaryDrawer";
 import Time from "./Time";
 import useIsActive, { isPathnameActive } from "./useIsActive";
@@ -59,22 +59,22 @@ const Link: FunctionComponent<{
 
   const isActive = useIsActive({ startTime, endTime, pathname });
 
-  const setVideoState = useSetRecoilState(videoState);
+  const [{ videoPathname }, setState] = useRecoilState(videoState);
 
   return (
     <StyledLink
       button
       sc={{ isActive, isActiveCSS, linkCSS }}
-      onClick={() => {
-        setVideoState(({ videoPathname }) => {
-          if (isPathnameActive({ pathname, videoPathname }) === false) {
-            navigate(pathname);
-          }
-          return {
-            time: startTime,
-            videoPathname: pathname,
-          };
+      onClick={async () => {
+        if (isPathnameActive({ pathname, videoPathname }) === false) {
+          await navigate(pathname);
+        }
+
+        setState({
+          time: startTime,
+          videoPathname: pathname,
         });
+
         if (isDrawerOpen === true) {
           setIsDrawerOpen(false);
         }

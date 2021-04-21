@@ -33,7 +33,6 @@ const buttonProps = {
 } as const;
 
 const baseButtonClassName = "plyr__control";
-
 const baseTooltipClassName = "plyr__tooltip";
 
 const TranscriptButton: FunctionComponent<{

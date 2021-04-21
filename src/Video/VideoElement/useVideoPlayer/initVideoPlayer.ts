@@ -12,6 +12,7 @@ const initVideoPlayer = (args: {
   sourceWidth: number;
   sourceHeight: number;
   setVideoPlayer: SetterOrUpdater<VideoPlayer>;
+  path: string;
 }) => {
   const {
     plyrImportRef,
@@ -19,6 +20,7 @@ const initVideoPlayer = (args: {
     sourceWidth,
     sourceHeight,
     setVideoPlayer,
+    path,
   } = args;
 
   const videoPlayer = (new plyrImportRef.current(
@@ -28,6 +30,8 @@ const initVideoPlayer = (args: {
       sourceHeight,
     })
   ) as unknown) as InitialVideoPlayer;
+
+  videoPlayer.videoName = path.replace(/\//g, "");
 
   videoPlayer.elements.container.id = "plyrContainer";
   videoPlayer.elements.container.tabIndex = -1;

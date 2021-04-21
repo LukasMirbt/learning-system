@@ -3,8 +3,7 @@ import {
   videoPlayButtonID,
   videoPlayerState,
 } from "../useVideoPlayer/useVideoPlayer";
-import { videoPaths } from "../../Video";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import setVideoTime from "./setVideoTime";
 import { atom } from "recoil";
 import { useLocation } from "@reach/router";
@@ -39,20 +38,23 @@ const useVideoState = () => {
 
   useEffect(() => {
     if (pathname !== "/" && state.videoPathname !== pathname) {
-      setState((prev) => ({
-        ...prev,
+      setState((prevState) => ({
+        time: prevState.time,
         videoPathname: pathname,
       }));
     }
   }, []);
 
   useEffect(() => {
-    const asyncEffect = async () => {
-      if (videoPlayer !== null) {
+    const setVideoTimeEffect = async () => {
+      if (
+        videoPlayer !== null &&
+        state.videoPathname.includes(videoPlayer.videoName)
+      ) {
         const { time } = state;
 
         if (time !== null) {
-          setVideoTime({ videoPlayer, time });
+          await setVideoTime({ videoPlayer, time });
 
           if (shouldFocusPlayButtonRef.current === true) {
             document.getElementById(videoPlayButtonID)?.focus();
@@ -62,8 +64,8 @@ const useVideoState = () => {
       }
     };
 
-    asyncEffect();
-  }, [videoPlayer, state, shouldFocusPlayButtonRef]);
+    setVideoTimeEffect();
+  }, [videoPlayer, shouldFocusPlayButtonRef, state]);
 };
 
 export default useVideoState;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import viewFromABlueMoonCaptionsSource from "file-loader!../../Media/View-from-a-blue-moon/captions.vtt";
 import elephantsDreamCaptionsSource from "file-loader!../../Media/Elephants-dream/captions.vtt";
@@ -76,7 +76,11 @@ const VideoElement: FunctionComponent<{ path: string }> = ({ path }) => {
         />
       </video>
 
-      <VideoSetup sourceWidth={sourceWidth} sourceHeight={sourceHeight} />
+      <VideoSetup
+        sourceWidth={sourceWidth}
+        sourceHeight={sourceHeight}
+        path={path}
+      />
     </Container>
   );
 };

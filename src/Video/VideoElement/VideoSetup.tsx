@@ -8,8 +8,9 @@ import useTranscriptToggleButton from "./useTranscriptToggleButton/useTranscript
 const VideoSetup: FunctionComponent<{
   sourceWidth: number;
   sourceHeight: number;
-}> = ({ sourceWidth, sourceHeight }) => {
-  useVideoPlayer({ sourceWidth, sourceHeight });
+  path: string;
+}> = ({ sourceWidth, sourceHeight, path }) => {
+  useVideoPlayer({ sourceWidth, sourceHeight, path });
 
   useTranscriptToggleButton();
 

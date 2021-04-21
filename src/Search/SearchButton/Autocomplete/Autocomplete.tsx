@@ -19,6 +19,7 @@ import { isSearchOpenState } from "../ButtonWithSearchDialog";
 import OptionItems from "./OptionItems";
 import { navigate } from "gatsby";
 import { videoState } from "../../../Video/VideoElement/useVideoState/useVideoState";
+import { isPathnameActive } from "../../../Drawer/Sections/Subsections/Link/useIsActive";
 
 export const searchAutocompleteInputID = "search-autocomplete";
 export const searchAutocompleteLabelID = `${searchAutocompleteInputID}-label`;
@@ -92,7 +93,7 @@ const Autocomplete: FunctionComponent = () => {
 
   const searchResults = useRecoilValue(searchResultsState);
 
-  const setVideoState = useSetRecoilState(videoState);
+  const [{ videoPathname }, setState] = useRecoilState(videoState);
 
   const resetSearchTerm = useResetRecoilState(searchTermState);
 
@@ -110,7 +111,7 @@ const Autocomplete: FunctionComponent = () => {
           setSearchTerm("");
         }
       }}
-      onChange={(event, option) => {
+      onChange={async (event, option) => {
         if (isValidOption(option) === false) {
           return;
         }
@@ -121,15 +122,15 @@ const Autocomplete: FunctionComponent = () => {
 
         const pathname = `/${videoTitle.replace(/\s+/g, "-")}`;
 
-        setVideoState((prevState) => {
-          if (prevState.videoPathname !== pathname) {
-            navigate(pathname);
-          }
-          return {
-            time: startTime,
-            videoPathname: pathname,
-          };
+        if (isPathnameActive({ pathname, videoPathname }) === false) {
+          await navigate(pathname);
+        }
+
+        setState({
+          time: startTime,
+          videoPathname: pathname,
         });
+
         resetSearchTerm();
         setIsSearchOpen(false);
       }}

@@ -1,6 +1,6 @@
-import { useLayoutEffect, useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { atom, useRecoilState } from "recoil";
+import { atom } from "recoil";
 import { videoElementID } from "../VideoElement";
 import { isTranscriptShowingState } from "../../Transcript/Transcript";
 import initVideoPlayer from "./initVideoPlayer";
@@ -9,6 +9,7 @@ export type Plyr = typeof import("plyr").prototype;
 
 export interface VideoPlayer extends Plyr {
   readonly canPlay: boolean;
+  videoName: string;
   elements: Plyr["elements"] & {
     container: HTMLElement;
     inputs: {
@@ -34,8 +35,9 @@ const plyrImportRefState = atom<{ current: typeof import("plyr") | null }>({
 const useVideoPlayer = (args: {
   sourceWidth: number;
   sourceHeight: number;
+  path: string;
 }) => {
-  const { sourceWidth, sourceHeight } = args;
+  const { sourceWidth, sourceHeight, path } = args;
   const setVideoPlayer = useSetRecoilState(videoPlayerState);
   const setIsTranscriptShowing = useSetRecoilState(isTranscriptShowingState);
   const plyrImportRef = useRecoilValue(plyrImportRefState);
@@ -55,6 +57,7 @@ const useVideoPlayer = (args: {
           sourceWidth,
           sourceHeight,
           setVideoPlayer,
+          path,
         });
       };
 
@@ -66,6 +69,7 @@ const useVideoPlayer = (args: {
         sourceWidth,
         sourceHeight,
         setVideoPlayer,
+        path,
       });
     }
 
