@@ -5,7 +5,7 @@ import Citation from "./Citation";
 
 export const videoLabelID = "videoLabel";
 
-const Title = styled(Typography)`
+const Container = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -13,12 +13,14 @@ const Title = styled(Typography)`
   width: 100%;
   height: ${({ theme }) => `${theme.titleRowREM}rem`};
 
-  font-size: 1.5rem;
-
   position: absolute;
   bottom: -4rem;
   left: 0;
   padding-top: 1rem;
+`;
+
+const Title = styled(Typography)`
+  font-size: 1.5rem;
 `;
 
 const TitleRow: FunctionComponent<{ path: string }> = ({ path }) => {
@@ -26,11 +28,13 @@ const TitleRow: FunctionComponent<{ path: string }> = ({ path }) => {
   const title = splitPath[1].replace(/-+/g, " ");
 
   return (
-    <Title id="videoLabel" variant="h1">
-      {title}
+    <Container>
+      <Title id="videoLabel" variant="h1">
+        {title}
+      </Title>
 
       <Citation title={title} />
-    </Title>
+    </Container>
   );
 };
 
