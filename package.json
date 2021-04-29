@@ -50,6 +50,7 @@
     "test": "jest --ci",
     "cypress:open": "cypress open",
     "cypress": "cypress run",
+    "eslint": "eslint",
     "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
   },
   "devDependencies": {
