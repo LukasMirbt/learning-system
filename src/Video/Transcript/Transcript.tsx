@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from "react";
-import { useMediaQuery } from "@material-ui/core";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "styled-components";
 import viewFromABlueMoonCues from "../../Media/View-from-a-blue-moon/searchableCues";
 import elephantsDreamCues from "../../Media/Elephants-dream/searchableCues";
 import CueList from "./CueList";
 import { atom, useRecoilValue } from "recoil";
 
-const sources = {
+export const cueSources = {
   "/Elephants-dream": {
     cues: elephantsDreamCues,
   },
@@ -26,7 +26,10 @@ const Transcript: FunctionComponent<{ path: string }> = ({ path }) => {
   const isTranscriptShowing = useRecoilValue(isTranscriptShowingState);
 
   return isLargeScreen === true && isTranscriptShowing === true ? (
-    <CueList path={path} cues={sources[path as keyof typeof sources].cues} />
+    <CueList
+      path={path}
+      cues={cueSources[path as keyof typeof cueSources].cues}
+    />
   ) : null;
 };
 

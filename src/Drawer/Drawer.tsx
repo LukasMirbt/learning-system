@@ -43,6 +43,7 @@ const Drawer: FunctionComponent = () => {
   const theme = useTheme();
 
   const isXLScreen = useMediaQuery(theme.breakpoints.up("xl"));
+
   return isXLScreen === true ? DrawerComponent : <TemporaryDrawer />;
 };
 

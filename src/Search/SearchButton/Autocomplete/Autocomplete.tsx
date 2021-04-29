@@ -15,7 +15,7 @@ import ResultListContainer from "./ResultListContainer";
 import PaperComponent from "./PaperComponent";
 import Fuse from "fuse.js";
 import { Searchable } from "../../../Media/Media";
-import { isSearchOpenState } from "../ButtonWithSearchDialog";
+import { isSearchOpenState } from "../SearchButton";
 import OptionItems from "./OptionItems";
 import { navigate } from "gatsby";
 import { videoState } from "../../../Video/VideoElement/useVideoState/useVideoState";

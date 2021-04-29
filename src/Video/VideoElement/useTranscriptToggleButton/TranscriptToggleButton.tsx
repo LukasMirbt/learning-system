@@ -44,6 +44,7 @@ const TranscriptButton: FunctionComponent<{
 
   return (
     <StyledButton
+      data-cy="toggleTranscriptButton"
       {...buttonProps}
       sc={{ theme }}
       className={buttonClassName.current}

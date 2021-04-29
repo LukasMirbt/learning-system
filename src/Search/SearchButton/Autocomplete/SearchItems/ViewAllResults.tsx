@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isSearchOpenState } from "../../ButtonWithSearchDialog";
+import { isSearchOpenState } from "../../SearchButton";
 import {
   searchResultsState,
   shouldSearchTermResetRefState,
@@ -27,6 +27,7 @@ const ViewAllResults: FunctionComponent = () => {
 
   return searchResults !== null && searchResults.length > 5 ? (
     <StyledLink
+      data-cy="viewAllResultsLink"
       onClick={() => {
         shouldSearchTermResetRef.current = false;
         setIsSearchOpen(false);

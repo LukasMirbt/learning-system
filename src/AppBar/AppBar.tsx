@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import MUIAppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import SearchButton from "../Search/SearchButton/ButtonWithSearchDialog";
+import SearchButton from "../Search/SearchButton/SearchButton";
 import DrawerButton from "./DrawerButton";
 import HomeLink from "./HomeLink";
 

@@ -28,6 +28,7 @@ const DrawerButton: FunctionComponent = () => {
 
   return (
     <StyledIconButton
+      data-cy="drawerButton"
       disableFocusRipple
       color="inherit"
       aria-label="Open navigation"

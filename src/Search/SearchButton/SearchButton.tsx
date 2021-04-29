@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
-import SearchDialog from "./SearchDialog";
+import SearchDialog from "./Dialog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { atom, useRecoilState } from "recoil";
@@ -38,7 +38,7 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const Search: FunctionComponent = () => {
+const SearchButton: FunctionComponent = () => {
   const [isSearchOpen, setIsSearchOpen] = useRecoilState(isSearchOpenState);
 
   return (
@@ -47,6 +47,7 @@ const Search: FunctionComponent = () => {
         location.pathname.includes("/search") === false ? (
           <Container>
             <StyledButton
+              data-cy="searchButton"
               aria-haspopup="dialog"
               onClick={() => {
                 setIsSearchOpen(true);
@@ -66,4 +67,4 @@ const Search: FunctionComponent = () => {
   );
 };
 
-export default Search;
+export default SearchButton;

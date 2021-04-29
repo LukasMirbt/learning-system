@@ -10,7 +10,7 @@ const Title = styled(Typography)<TitleProps>`
 
 const HomeLink: FunctionComponent = () => {
   return (
-    <Title variant="h6" component="a" href="/">
+    <Title data-cy="homeLink" variant="h6" component="a" href="/">
       Learning system
     </Title>
   );

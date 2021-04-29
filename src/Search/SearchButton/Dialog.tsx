@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect } from "react";
 import styled from "styled-components";
 import MUIDialog from "@material-ui/core/Dialog";
 import { useSetRecoilState, useResetRecoilState, useRecoilValue } from "recoil";
-import { isSearchOpenState } from "./ButtonWithSearchDialog";
+import { isSearchOpenState } from "./SearchButton";
 import { searchTermState, shouldSearchTermResetRefState } from "../Search";
 import Autocomplete from "./Autocomplete/Autocomplete";
 
@@ -22,7 +22,7 @@ const StyledDialog = styled(MUIDialog)`
   }
 `;
 
-const Modal: FunctionComponent = () => {
+const Dialog: FunctionComponent = () => {
   const setIsSearchOpen = useSetRecoilState(isSearchOpenState);
 
   const resetSearchTerm = useResetRecoilState(searchTermState);
@@ -58,4 +58,4 @@ const Modal: FunctionComponent = () => {
   );
 };
 
-export default Modal;
+export default Dialog;
