@@ -3,6 +3,7 @@
 describe("Learning system", function () {
   beforeEach(function () {
     cy.visit("/");
+    cy.get('[data-plyr="mute"]').click({ force: true });
   });
 
   it("Front page can be opened", function () {
@@ -37,13 +38,13 @@ describe("Learning system", function () {
     cy.get('[data-plyr="volume"]')
       .as("volume")
       .invoke("attr", "aria-valuenow")
-      .should("equal", "100");
+      .should("equal", "0");
 
     cy.get('[data-plyr="mute"]').as("mute").click({ force: true });
-    cy.get("@volume").invoke("attr", "aria-valuenow").should("equal", "0");
+    cy.get("@volume").invoke("attr", "aria-valuenow").should("equal", "100");
 
     cy.get("@mute").click({ force: true });
-    cy.get("@volume").invoke("attr", "aria-valuenow").should("equal", "100");
+    cy.get("@volume").invoke("attr", "aria-valuenow").should("equal", "0");
 
     cy.get("#transcriptContainer").should("exist");
     cy.get('[data-cy="toggleTranscriptButton"]').click();
@@ -53,7 +54,7 @@ describe("Learning system", function () {
   });
 
   it("Menu button opens navigation drawer on smaller screens and it can be used to navigate between video sections", function () {
-    cy.get("#videoLabel").contains("Elephants dream");
+    cy.contains("Elephants dream");
     cy.get("video").its("0.paused").should("be.true");
 
     cy.get("[data-cy=drawerButton]").click();
@@ -72,7 +73,7 @@ describe("Learning system", function () {
       .first()
       .click();
 
-    cy.get("#videoLabel").contains("View from a blue moon");
+    cy.contains("View from a blue moon");
     cy.get("nav").should("not.exist");
 
     cy.get("[data-cy=drawerButton]").click();
@@ -89,7 +90,7 @@ describe("Learning system", function () {
 
     cy.get("video").its("0.paused").should("be.false");
 
-    cy.get("#videoLabel").contains("Elephants dream");
+    cy.contains("Elephants dream");
   });
 
   it("Transcript can be used to navigate to different times in a video", function () {
@@ -101,13 +102,14 @@ describe("Learning system", function () {
   });
 
   it("Search can be used to find results and to navigate in videos and to find a searchable list of all video subtitles and sections", function () {
-    cy.get("#videoLabel").contains("Elephants dream");
+    cy.contains("Elephants dream");
 
     cy.get('[data-cy="searchButton"]').as("searchButton").click();
     cy.get('[aria-label="Search"]').as("searchInput").find("input").type("a");
+
     cy.get("@searchInput").find('[role="option"]').eq(2).click();
 
-    cy.get("#videoLabel").contains("View from a blue moon");
+    cy.contains("View from a blue moon");
 
     cy.get("@searchButton").click();
     cy.get("@searchInput").find("input").type("a");
@@ -117,6 +119,6 @@ describe("Learning system", function () {
 
     cy.get("a").eq(4).click();
 
-    cy.get("#videoLabel").contains("Elephants dream");
+    cy.contains("Elephants dream");
   });
 });
