@@ -21,10 +21,18 @@ describe("Learning system", function () {
     cy.get("video").its("0.paused").should("be.true");
 
     cy.get('[data-plyr="seek"]').as("videoProgressBar").type("{rightarrow}");
-    cy.get("video").its("0.currentTime").should("equal", 10);
+    cy.get("video")
+      .its("0.currentTime")
+      .then((val) => {
+        expect(Math.round(val)).to.equal(10);
+      });
 
     cy.get("@videoProgressBar").focus().type("{leftarrow}");
-    cy.get("video").its("0.currentTime").should("equal", 0);
+    cy.get("video")
+      .its("0.currentTime")
+      .then((val) => {
+        expect(Math.round(val)).to.equal(0);
+      });
 
     cy.get('[data-plyr="volume"]')
       .as("volume")
@@ -45,7 +53,7 @@ describe("Learning system", function () {
   });
 
   it("Menu button opens navigation drawer on smaller screens and it can be used to navigate between video sections", function () {
-    cy.get("#videoLabel").as("title").contains("Elephants dream");
+    cy.get("#videoLabel").contains("Elephants dream");
     cy.get("video").its("0.paused").should("be.true");
 
     cy.get("[data-cy=drawerButton]").click();
@@ -64,7 +72,7 @@ describe("Learning system", function () {
       .first()
       .click();
 
-    cy.get("@title").contains("View from a blue moon");
+    cy.get("#videoLabel").contains("View from a blue moon");
     cy.get("nav").should("not.exist");
 
     cy.get("[data-cy=drawerButton]").click();
@@ -81,7 +89,7 @@ describe("Learning system", function () {
 
     cy.get("video").its("0.paused").should("be.false");
 
-    cy.get("@title").contains("Elephants dream");
+    cy.get("#videoLabel").contains("Elephants dream");
   });
 
   it("Transcript can be used to navigate to different times in a video", function () {
@@ -93,13 +101,13 @@ describe("Learning system", function () {
   });
 
   it("Search can be used to find results and to navigate in videos and to find a searchable list of all video subtitles and sections", function () {
-    cy.get("#videoLabel").as("title").contains("Elephants dream");
+    cy.get("#videoLabel").contains("Elephants dream");
 
     cy.get('[data-cy="searchButton"]').as("searchButton").click();
     cy.get('[aria-label="Search"]').as("searchInput").find("input").type("a");
     cy.get("@searchInput").find('[role="option"]').eq(2).click();
 
-    cy.get("@title").contains("View from a blue moon");
+    cy.get("#videoLabel").contains("View from a blue moon");
 
     cy.get("@searchButton").click();
     cy.get("@searchInput").find("input").type("a");
@@ -109,6 +117,6 @@ describe("Learning system", function () {
 
     cy.get("a").eq(4).click();
 
-    cy.get("@title").contains("Elephants dream");
+    cy.get("#videoLabel").contains("Elephants dream");
   });
 });
