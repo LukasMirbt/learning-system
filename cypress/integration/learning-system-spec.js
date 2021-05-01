@@ -1,12 +1,6 @@
-/* eslint-disable jest/expect-expect */
-/* eslint-disable jest/valid-expect-in-promise */
+/* eslint-disable jest/expect-expect, jest/valid-expect-in-promise, jest/valid-expect */
 
 describe("Learning system", function () {
-  /* 
-    Some assertions in this file are extremely flaky without using "cy.wait()".
-    Improvement suggestion: find a more optimal solution than using "cy.wait()" 
-  */
-
   beforeEach(function () {
     cy.visit("/");
   });
@@ -15,128 +9,106 @@ describe("Learning system", function () {
     cy.contains("Learning system");
   });
 
+  it("Video controls work correctly", function () {
+    cy.get("video").its("0.paused").should("be.true");
+
+    cy.get('[data-plyr="play"]').eq(1).as("playButton");
+
+    cy.get("@playButton").click({ force: true });
+    cy.get("video").its("0.paused").should("be.false");
+
+    cy.get("@playButton").click({ force: true });
+    cy.get("video").its("0.paused").should("be.true");
+
+    cy.get('[data-plyr="seek"]').as("videoProgressBar").type("{rightarrow}");
+    cy.get("video").its("0.currentTime").should("equal", 10);
+
+    cy.get("@videoProgressBar").focus().type("{leftarrow}");
+    cy.get("video").its("0.currentTime").should("equal", 0);
+
+    cy.get('[data-plyr="volume"]')
+      .as("volume")
+      .invoke("attr", "aria-valuenow")
+      .should("equal", "100");
+
+    cy.get('[data-plyr="mute"]').as("mute").click({ force: true });
+    cy.get("@volume").invoke("attr", "aria-valuenow").should("equal", "0");
+
+    cy.get("@mute").click({ force: true });
+    cy.get("@volume").invoke("attr", "aria-valuenow").should("equal", "100");
+
+    cy.get("#transcriptContainer").should("exist");
+    cy.get('[data-cy="toggleTranscriptButton"]').click();
+    cy.get("#transcriptContainer").should("not.exist");
+    cy.get('[data-cy="toggleTranscriptButton"]').click();
+    cy.get("#transcriptContainer").should("exist");
+  });
+
   it("Menu button opens navigation drawer on smaller screens and it can be used to navigate between video sections", function () {
-    /* 
-      cy.get("video") returns a jQuery object rather than the actual video DOM node 
-      which makes it neccessary to access "0.paused" to check paused state. 
-    */
+    cy.get("#videoLabel").as("title").contains("Elephants dream");
+    cy.get("video").its("0.paused").should("be.true");
 
-    cy.get("h1").then(($title1) => {
-      const firstVideoTitle = $title1.text();
+    cy.get("[data-cy=drawerButton]").click();
+    cy.get("nav").should("exist");
 
-      cy.get("video").its("0.paused").should("be.true");
+    cy.get("nav")
+      .find('[aria-expanded="false"]')
+      .last()
+      .click()
+      .next('[role="region"]')
+      .find('[aria-expanded="false"]')
+      .first()
+      .click()
+      .next('[role="region"]')
+      .find('[role="button"]')
+      .first()
+      .click();
 
-      cy.get("[data-cy=drawerButton]").click();
-      cy.get("nav").should("exist");
+    cy.get("@title").contains("View from a blue moon");
+    cy.get("nav").should("not.exist");
 
-      cy.get("nav")
-        .find('[aria-expanded="false"]')
-        .last()
-        .click()
-        .next('[role="region"]')
-        .find('[aria-expanded="false"]')
-        .first()
-        .click()
-        .next('[role="region"]')
-        .find('[role="button"]')
-        .first()
-        .click();
+    cy.get("[data-cy=drawerButton]").click();
+    cy.get("nav").should("exist");
 
-      cy.get("video").its("0.paused").should("be.false");
+    cy.get("nav")
+      .find('[aria-expanded="false"]')
+      .first()
+      .click()
+      .next('[role="region"]')
+      .find('[role="button"]')
+      .first()
+      .click();
 
-      cy.get("h1").then(($title2) => {
-        const secondVideoTitle = $title2.text();
-        expect(firstVideoTitle).not.to.eq(secondVideoTitle);
+    cy.get("video").its("0.paused").should("be.false");
 
-        cy.wait(5000);
-
-        cy.get("video")
-          .click({ force: true })
-          .its("0.paused")
-          .should("be.true");
-
-        cy.get("nav").should("not.exist");
-        cy.get("[data-cy=drawerButton]").click();
-        cy.get("nav").should("exist");
-
-        cy.get("nav")
-          .find('[aria-expanded="false"]')
-          .first()
-          .click()
-          .next('[role="region"]')
-          .find('[role="button"]')
-          .first()
-          .click();
-
-        cy.wait(5000);
-
-        cy.get("video").its("0.paused").should("be.false");
-
-        cy.wait(5000);
-
-        cy.get("h1").then(($title3) => {
-          const thirdVideoTitle = $title3.text();
-          expect(firstVideoTitle).to.eq(thirdVideoTitle);
-
-          cy.get("#videoPlayButton").click({ force: true });
-          cy.get("video").its("0.paused").should("be.true");
-        });
-      });
-    });
+    cy.get("@title").contains("Elephants dream");
   });
 
   it("Transcript can be used to navigate to different times in a video", function () {
-    cy.get("video").its("0.paused").should("be.true");
     cy.get("video").its("0.currentTime").should("equal", 0);
 
     cy.get("#transcriptContainer").find('[role="button"]').eq(4).click();
 
-    cy.get("video").its("0.paused").should("be.false");
     cy.get("video").its("0.currentTime").should("not.equal", 0);
   });
 
   it("Search can be used to find results and to navigate in videos and to find a searchable list of all video subtitles and sections", function () {
-    cy.get("video").its("0.paused").should("be.true");
-    cy.get("video").its("0.currentTime").should("equal", 0);
+    cy.get("#videoLabel").as("title").contains("Elephants dream");
 
-    cy.get('[data-cy="searchButton"]').click();
+    cy.get('[data-cy="searchButton"]').as("searchButton").click();
+    cy.get('[aria-label="Search"]').as("searchInput").find("input").type("a");
+    cy.get("@searchInput").find('[role="option"]').eq(2).click();
 
-    cy.get('[aria-label="Search"]').find("input").type("a");
+    cy.get("@title").contains("View from a blue moon");
 
-    cy.get('[aria-label="Search"]').find('[role="option"]').eq(2).click();
+    cy.get("@searchButton").click();
+    cy.get("@searchInput").find("input").type("a");
+    cy.get("@searchInput").find('[data-cy="viewAllResultsLink"]').click();
 
-    cy.get('[data-cy="searchButton"]').click();
-    cy.get('[aria-label="Search"]').find("input").type("a");
+    cy.get("#virtualizedListLabel").contains("search results");
 
-    cy.get('[aria-label="Search"]')
-      .find('[data-cy="viewAllResultsLink"]')
-      .click();
+    cy.get("a").eq(4).click();
 
-    cy.wait(5000);
-
-    cy.get("h1").then(($title1) => {
-      expect($title1.text()).to.match(/search results/);
-
-      cy.get("a").eq(2).click();
-
-      cy.wait(5000);
-      cy.get("video").its("0.paused").should("be.false");
-
-      cy.get("h1").then(($title2) => {
-        expect($title1.text()).not.to.equal($title2.text());
-      });
-    });
-  });
-
-  it("Transcript toggle button can hide and show transcript", function () {
-    cy.get("#transcriptContainer").should("exist");
-
-    cy.get('[data-cy="toggleTranscriptButton"]').click();
-
-    cy.get("#transcriptContainer").should("not.exist");
-
-    cy.get('[data-cy="toggleTranscriptButton"]').click();
-
-    cy.get("#transcriptContainer").should("exist");
+    cy.get("@title").contains("Elephants dream");
   });
 });

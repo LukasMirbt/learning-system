@@ -9,7 +9,7 @@ import elephantsDreamPosterSource from "../../Media/Elephants-dream/poster.png";
 export const trackElementID = "videoElement-track";
 export const videoElementID = "videoElement-videoElement";
 
-const sources = {
+export const videoSources = {
   "/Elephants-dream": {
     title: "Elephants dream",
     videoSource:
@@ -52,7 +52,7 @@ const VideoElement: FunctionComponent<{ path: string }> = ({ path }) => {
     posterSource,
     sourceWidth,
     sourceHeight,
-  } = sources[path as keyof typeof sources];
+  } = videoSources[path as keyof typeof videoSources];
 
   return (
     <Container>

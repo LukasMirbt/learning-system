@@ -8,6 +8,8 @@ import {
   shouldSearchTermResetRefState,
 } from "../../../Search";
 
+export const searchListPath = "/search";
+
 const StyledLink = styled(Link)`
   align-self: center;
   color: rgba(0, 0, 0, 0.75);
@@ -32,7 +34,7 @@ const ViewAllResults: FunctionComponent = () => {
         shouldSearchTermResetRef.current = false;
         setIsSearchOpen(false);
       }}
-      to="/search"
+      to={searchListPath}
     >
       {`View all ${searchResults.length} results`}
     </StyledLink>

@@ -6,6 +6,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { atom, useRecoilState } from "recoil";
 import Button from "@material-ui/core/Button";
 import { Location } from "@reach/router";
+import { searchListPath } from "../SearchButton/Autocomplete/SearchItems/ViewAllResults";
 
 export const isSearchOpenState = atom({
   key: "isSearchOpen",
@@ -44,7 +45,7 @@ const SearchButton: FunctionComponent = () => {
   return (
     <Location>
       {({ location }) =>
-        location.pathname.includes("/search") === false ? (
+        location.pathname.includes(searchListPath) === false ? (
           <Container>
             <StyledButton
               data-cy="searchButton"
